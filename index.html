@@ -102,13 +102,13 @@
 
   .mega-menu {
     position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
-    min-width: 360px; max-width: calc(100vw - 32px);
+    min-width: 160px; max-width: calc(100vw - 32px);
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
     padding: 12px 16px;
     display: none; z-index: 999;
-    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: wrap;
     gap: 4px 12px;
     animation: menuIn 0.2s ease;
   }
@@ -116,7 +116,7 @@
     from { opacity:0; transform:translateX(-50%) translateY(-4px); }
     to   { opacity:1; transform:translateX(-50%) translateY(0); }
   }
-  .nav-tab:hover .mega-menu { display: grid; }
+  .nav-tab:hover .mega-menu { display: flex; }
   .mega-item {
     display: flex; align-items: center; gap: 8px;
     padding: 7px 10px; border-radius: 6px;
@@ -539,46 +539,23 @@
     <div class="nav-tab" id="ntAssetQuality">
       数据资产与质量<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#34C759"></span>XDAP 平台</a>
-        <a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a>
         <a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 数据质量</a>
         <a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产平台</a>
         <a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a>
-        <a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a>
-        <a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a>
-        <a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a>
-        <a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#5856D6"></span>智能助手</a>
-        <a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8E8E93"></span>权限管理中心</a>
       </div>
     </div>
     <div class="nav-tab" id="ntAnalysis">
       分析<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#34C759"></span>XDAP 平台</a>
-        <a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a>
-        <a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 数据质量</a>
-        <a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产平台</a>
-        <a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a>
         <a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a>
-        <a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a>
-        <a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a>
-        <a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#5856D6"></span>智能助手</a>
-        <a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8E8E93"></span>权限管理中心</a>
+        <a class="mega-item" onclick="navTo('tracking','ntAnalysis')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a>
       </div>
     </div>
     <div class="nav-tab" id="ntApplication">
       应用<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#34C759"></span>XDAP 平台</a>
-        <a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a>
-        <a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 数据质量</a>
-        <a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产平台</a>
-        <a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a>
-        <a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a>
         <a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a>
         <a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a>
-        <a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#5856D6"></span>智能助手</a>
-        <a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8E8E93"></span>权限管理中心</a>
       </div>
     </div>
     <div class="nav-tab" id="ntAI"          onclick="navTo('ai')">AI</div>
