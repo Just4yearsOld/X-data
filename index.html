@@ -89,6 +89,10 @@
     transition: color 0.2s; white-space: nowrap; border-radius: 7px;
     letter-spacing: -0.01em;
   }
+  .nav-tab::after {
+    content: ''; position: absolute; top: 100%; left: 0; right: 0;
+    height: 14px; z-index: 0;
+  }
   .nav-tab:hover { color: var(--text); background: var(--fill-quaternary); }
   .nav-tab.active {
     color: var(--blue); font-weight: 600;
@@ -524,7 +528,8 @@
       <div class="mega-menu">
         <div class="mega-col"><div class="mega-col-title">集成</div><a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#34C759"></span>XDAP 平台</a></div>
         <div class="mega-col"><div class="mega-col-title">埋点</div><a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a></div>
-        <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 质量</a><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a></div>
+        <div class="mega-col"><div class="mega-col-title">治理</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 质量</a></div>
+        <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a></div>
         <div class="mega-col"><div class="mega-col-title">分析</div><a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a><a class="mega-item" onclick="navTo('tracking','ntAnalysis')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a></div>
         <div class="mega-col"><div class="mega-col-title">应用</div><a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a><a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a></div>
         <div class="mega-col"><div class="mega-col-title">AI</div><a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#5856D6"></span>智能助手</a></div>
