@@ -169,11 +169,17 @@
   .pc-icon svg { width: 22px; height: 22px; }
   .pc-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
   .pc-badge { display: inline-flex; align-items: center; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
-  .pc-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; flex: 1; }
-  .pc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pc-desc {
+    font-size: 12.5px; color: var(--text-secondary); line-height: 1.6;
+    margin-bottom: 14px; flex: 1;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  .pc-tags { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
   .pc-tag {
-    font-size: 11.5px; padding: 3px 10px; border-radius: 6px;
+    font-size: 11.5px; padding: 4px 6px; border-radius: 6px;
     color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;
     box-shadow: -2px -2px 4px rgba(var(--shadow-light),0.8), 2px 2px 4px rgba(var(--shadow-dark),0.2);
   }
   .pc-tag:hover { color: var(--accent); box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.9), 3px 3px 6px rgba(var(--shadow-dark),0.3); }
@@ -281,7 +287,7 @@
   }
   .dm-icon svg { width: 17px; height: 17px; }
   .detail-module-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-  .detail-module-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+  .detail-module-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
 
   .detail-entry-btn {
     display: inline-flex; align-items: center; gap: 8px;
@@ -524,7 +530,7 @@ function renderPortalCards() {
       <a class="platform-card">
         <div class="pc-hd"><div class="pc-icon">${p.iconSvg}</div><div><div class="pc-title">${p.name}</div><span class="pc-badge">${p.category}</span></div></div>
         <div class="pc-desc">${p.desc}</div>
-        <div class="pc-tags">${p.modules.slice(0,5).map(m=>`<span class="pc-tag">${m.n}</span>`).join('')}</div>
+        <div class="pc-tags">${p.modules.slice(0,6).map(m=>`<span class="pc-tag">${m.n}</span>`).join('')}</div>
       </a>
     </div>`;
   }).join('');
