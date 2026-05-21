@@ -69,7 +69,7 @@
 
   .mega-menu {
     position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
-    min-width: 680px; background: var(--bg); border-radius: var(--radius-lg);
+    min-width: 120px; background: var(--bg); border-radius: var(--radius-lg);
     box-shadow: -8px -8px 18px rgba(var(--shadow-light),0.9), 8px 8px 18px rgba(var(--shadow-dark),0.4);
     padding: 18px 22px 16px; display: none; z-index: 999;
     animation: slideDown 0.2s ease;
@@ -342,7 +342,12 @@
     <div class="nav-tab" id="ntGovernance"  onclick="navTo('governance')">数据治理</div>
     <div class="nav-tab" id="ntAsset"       onclick="navTo('asset')">数据资产</div>
     <div class="nav-tab" id="ntAnalysis"    onclick="navTo('adhoc')">分析</div>
-    <div class="nav-tab" id="ntApplication" onclick="navTo('abtest')">应用</div>
+    <div class="nav-tab" id="ntApplication">
+      应用<span class="nav-tab-arrow">›</span>
+      <div class="mega-menu">
+        <div class="mega-col"><div class="mega-col-title">应用</div><a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#B5737A"></span>A/B 实验</a><a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#A08C6E"></span>CDP 画像</a></div>
+      </div>
+    </div>
     <div class="nav-tab" id="ntPermission"  onclick="navTo('permission')">权限</div>
   </div>
 
