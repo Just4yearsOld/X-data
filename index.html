@@ -102,29 +102,38 @@
 
   .mega-menu {
     position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
-    min-width: 160px; max-width: calc(100vw - 32px);
+    min-width: 560px; max-width: calc(100vw - 32px);
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-    padding: 12px 16px;
+    padding: 16px;
     display: none; z-index: 999;
-    flex-wrap: wrap;
-    gap: 4px 12px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
     animation: menuIn 0.2s ease;
   }
   @keyframes menuIn {
     from { opacity:0; transform:translateX(-50%) translateY(-4px); }
     to   { opacity:1; transform:translateX(-50%) translateY(0); }
   }
-  .nav-tab:hover .mega-menu { display: flex; }
-  .mega-item {
-    display: flex; align-items: center; gap: 8px;
-    padding: 7px 10px; border-radius: 6px;
-    color: var(--text); font-size: 13px; white-space: nowrap;
-    cursor: pointer; text-decoration: none; transition: background 0.15s;
+  .nav-tab:hover .mega-menu { display: grid; }
+
+  .mega-card {
+    padding: 12px; border-radius: 8px; cursor: pointer;
+    transition: background 0.15s; text-decoration: none; display: block;
   }
-  .mega-item:hover { background: #F5F6F8; }
-  .mega-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .mega-card:hover { background: #F5F6F8; }
+  .mega-card-hd {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap;
+  }
+  .mega-card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .mega-card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+  .mega-card-tag {
+    font-size: 11px; padding: 2px 7px; border-radius: 4px;
+    background: #F5F6F8; color: var(--text-secondary); white-space: nowrap;
+  }
 
   .nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
   .nav-search {
@@ -522,16 +531,46 @@
     <div class="nav-tab active" id="ntHome" onclick="goHome()">
       全景<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#34C759"></span>XDAP 平台</a>
-        <a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a>
-        <a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 数据质量</a>
-        <a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产平台</a>
-        <a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a>
-        <a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a>
-        <a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a>
-        <a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a>
-        <a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#5856D6"></span>智能助手</a>
-        <a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8E8E93"></span>权限管理中心</a>
+        <a class="mega-card" onclick="navTo('integration')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#34C759"></span>XDAP 数据集成</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">数据源管理</span><span class="mega-card-tag">ETL 任务配置</span><span class="mega-card-tag">任务调度</span><span class="mega-card-tag">实时同步</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('tracking')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#AF52DE"></span>迅数平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">埋点管理</span><span class="mega-card-tag">事件分析</span><span class="mega-card-tag">漏斗分析</span><span class="mega-card-tag">留存分析</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('governance')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF9500"></span>DQC 数据质量</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">质量规则配置</span><span class="mega-card-tag">异常检测</span><span class="mega-card-tag">质量报告</span><span class="mega-card-tag">告警通知</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('asset')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#007AFF"></span>数据资产平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">资产目录</span><span class="mega-card-tag">元数据管理</span><span class="mega-card-tag">数据血缘</span><span class="mega-card-tag">影响分析</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('metric')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#5AC8FA"></span>指标平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">指标定义</span><span class="mega-card-tag">指标市场</span><span class="mega-card-tag">口径管理</span><span class="mega-card-tag">指标生产</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('adhoc')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#00C7BE"></span>AdHoc 即席查询</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">SQL 编辑器</span><span class="mega-card-tag">多源联查</span><span class="mega-card-tag">结果可视化</span><span class="mega-card-tag">查询历史</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('abtest')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF3B30"></span>A/B 实验平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">实验创建</span><span class="mega-card-tag">流量分配</span><span class="mega-card-tag">统计检验</span><span class="mega-card-tag">实验报告</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('cdp')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF2D55"></span>CDP 用户画像</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">用户标签</span><span class="mega-card-tag">人群圈选</span><span class="mega-card-tag">用户画像</span><span class="mega-card-tag">行为分析</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('ai')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#5856D6"></span>X-Data AI 助手</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">自然语言取数</span><span class="mega-card-tag">智能数据分析</span><span class="mega-card-tag">实验报告生成</span><span class="mega-card-tag">自动图表</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('permission')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#8E8E93"></span>权限管理中心</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">成员管理</span><span class="mega-card-tag">角色权限</span><span class="mega-card-tag">权限申请</span><span class="mega-card-tag">审批流程</span></div>
+        </a>
       </div>
     </div>
     <div class="nav-tab" id="ntIntegration" onclick="navTo('integration')">数据集成</div>
@@ -539,23 +578,44 @@
     <div class="nav-tab" id="ntAssetQuality">
       数据资产与质量<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 数据质量</a>
-        <a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产平台</a>
-        <a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a>
+        <a class="mega-card" onclick="navTo('governance')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF9500"></span>DQC 数据质量</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">质量规则配置</span><span class="mega-card-tag">异常检测</span><span class="mega-card-tag">质量报告</span><span class="mega-card-tag">告警通知</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('asset')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#007AFF"></span>数据资产平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">资产目录</span><span class="mega-card-tag">元数据管理</span><span class="mega-card-tag">数据血缘</span><span class="mega-card-tag">影响分析</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('metric')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#5AC8FA"></span>指标平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">指标定义</span><span class="mega-card-tag">指标市场</span><span class="mega-card-tag">口径管理</span><span class="mega-card-tag">指标生产</span></div>
+        </a>
       </div>
     </div>
     <div class="nav-tab" id="ntAnalysis">
       分析<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a>
-        <a class="mega-item" onclick="navTo('tracking','ntAnalysis')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a>
+        <a class="mega-card" onclick="navTo('adhoc')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#00C7BE"></span>AdHoc 即席查询</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">SQL 编辑器</span><span class="mega-card-tag">多源联查</span><span class="mega-card-tag">结果可视化</span><span class="mega-card-tag">查询历史</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('tracking','ntAnalysis')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#AF52DE"></span>迅数平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">埋点管理</span><span class="mega-card-tag">事件分析</span><span class="mega-card-tag">漏斗分析</span><span class="mega-card-tag">留存分析</span></div>
+        </a>
       </div>
     </div>
     <div class="nav-tab" id="ntApplication">
       应用<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
-        <a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a>
-        <a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a>
+        <a class="mega-card" onclick="navTo('abtest')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF3B30"></span>A/B 实验平台</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">实验创建</span><span class="mega-card-tag">流量分配</span><span class="mega-card-tag">统计检验</span><span class="mega-card-tag">实验报告</span></div>
+        </a>
+        <a class="mega-card" onclick="navTo('cdp')">
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF2D55"></span>CDP 用户画像</div>
+          <div class="mega-card-tags"><span class="mega-card-tag">用户标签</span><span class="mega-card-tag">人群圈选</span><span class="mega-card-tag">用户画像</span><span class="mega-card-tag">行为分析</span></div>
+        </a>
       </div>
     </div>
     <div class="nav-tab" id="ntAI"          onclick="navTo('ai')">AI</div>
