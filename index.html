@@ -204,6 +204,8 @@
   .t-cdp .pc-badge { background: #F0EAE0; color: #7A5832; }
   .t-prm .pc-icon { background: #8A8E95; }
   .t-prm .pc-badge { background: #EEEEEF; color: #555A60; }
+  .t-ai .pc-icon { background: #8B7EB5; }
+  .t-ai .pc-badge { background: #EBE2F0; color: #6A4E85; }
 
   /* ─── LANDSCAPE VIEW ─── */
   .landscape-header { margin-bottom: 20px; }
@@ -330,17 +332,23 @@
       全景<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
         <div class="mega-col"><div class="mega-col-title">集成</div><a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#6B9E7A"></span>XDAP 平台</a></div>
-        <div class="mega-col"><div class="mega-col-title">治理</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#C4925A"></span>DQC 数据质量</a></div>
         <div class="mega-col"><div class="mega-col-title">埋点</div><a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#8E7AB5"></span>迅数平台</a></div>
-        <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#5A7FA0"></span>数据资产平台</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#6B8FAD"></span>指标平台</a></div>
+        <div class="mega-col"><div class="mega-col-title">资产与质量</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#C4925A"></span>DQC 质量</a><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#5A7FA0"></span>数据资产</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#6B8FAD"></span>指标平台</a></div>
         <div class="mega-col"><div class="mega-col-title">分析</div><a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#7AA5B0"></span>AdHoc 查询</a></div>
         <div class="mega-col"><div class="mega-col-title">应用</div><a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#B5737A"></span>A/B 实验</a><a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#A08C6E"></span>CDP 画像</a></div>
+        <div class="mega-col"><div class="mega-col-title">AI</div><a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#8B7EB5"></span>智能助手</a></div>
         <div class="mega-col"><div class="mega-col-title">权限</div><a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8A8E95"></span>权限管理中心</a></div>
       </div>
     </div>
     <div class="nav-tab" id="ntIntegration" onclick="navTo('integration')">数据集成</div>
-    <div class="nav-tab" id="ntGovernance"  onclick="navTo('governance')">数据治理</div>
-    <div class="nav-tab" id="ntAsset"       onclick="navTo('asset')">数据资产</div>
+    <div class="nav-tab" id="ntTracking"    onclick="navTo('tracking')">数据埋点</div>
+    <div class="nav-tab" id="ntAssetQuality">
+      数据资产与质量<span class="nav-tab-arrow">›</span>
+      <div class="mega-menu">
+        <div class="mega-col"><div class="mega-col-title">治理</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#C4925A"></span>DQC 数据质量</a></div>
+        <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#5A7FA0"></span>数据资产平台</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#6B8FAD"></span>指标平台</a></div>
+      </div>
+    </div>
     <div class="nav-tab" id="ntAnalysis"    onclick="navTo('adhoc')">分析</div>
     <div class="nav-tab" id="ntApplication">
       应用<span class="nav-tab-arrow">›</span>
@@ -348,6 +356,7 @@
         <div class="mega-col"><div class="mega-col-title">应用</div><a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#B5737A"></span>A/B 实验</a><a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#A08C6E"></span>CDP 画像</a></div>
       </div>
     </div>
+    <div class="nav-tab" id="ntAI"          onclick="navTo('ai')">AI</div>
     <div class="nav-tab" id="ntPermission"  onclick="navTo('permission')">权限</div>
   </div>
 
@@ -366,11 +375,11 @@
 <main class="main">
   <div id="homeView">
     <div class="hero-band">
-      <div class="hero-text"><h1><span>X-Data</span> · 一站式数据平台</h1><p>整合数据集成、治理、资产、分析与应用，打造迅雷数据全链路智能化平台，让每一个数据决策都有迹可循。</p></div>
+      <div class="hero-text"><h1><span>X-Data</span> · 一站式数据平台</h1><p>整合数据集成、埋点、资产与质量、分析与应用，AI 智能驱动数据全链路，让每一个数据决策都有迹可循。</p></div>
       <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-val">8+</div><div class="hero-stat-label">核心平台</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">10+</div><div class="hero-stat-label">核心平台</div></div>
         <div class="hero-stat"><div class="hero-stat-val">200+</div><div class="hero-stat-label">数据指标</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">全链路</div><div class="hero-stat-label">数据闭环</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">AI 驱动</div><div class="hero-stat-label">智能分析</div></div>
       </div>
     </div>
 
@@ -391,7 +400,7 @@
       <div class="landscape-header"><h2>产品全景视图</h2><p>X-Data 平台所有产品矩阵一览，点击功能项可直接跳转对应平台</p></div>
       <div class="landscape-grid">
         <div>
-          <div class="landscape-col-title"><span style="color:#6B9E7A">●</span> 数据开发建设</div>
+          <div class="landscape-col-title"><span style="color:#6B9E7A">●</span> 数据集成与埋点</div>
           <div class="landscape-col-body">
             <div class="ls-sub">集成</div>
             <div class="ls-item" onclick="navTo('integration')"><span class="ls-dot" style="background:#6B9E7A"></span>XDAP 数据集成</div>
@@ -404,7 +413,7 @@
           </div>
         </div>
         <div>
-          <div class="landscape-col-title"><span style="color:#C4925A">●</span> 资产治理管理</div>
+          <div class="landscape-col-title"><span style="color:#C4925A">●</span> 数据资产与质量</div>
           <div class="landscape-col-body">
             <div class="ls-sub">治理</div>
             <div class="ls-item" onclick="navTo('governance')"><span class="ls-dot" style="background:#C4925A"></span>DQC 数据质量</div>
@@ -430,17 +439,18 @@
           </div>
         </div>
         <div>
-          <div class="landscape-col-title"><span style="color:#8A8E95">●</span> 管理中心</div>
+          <div class="landscape-col-title"><span style="color:#8B7EB5">●</span> AI 与管理</div>
           <div class="landscape-col-body">
-            <div class="ls-sub">权限管控</div>
+            <div class="ls-sub">智能</div>
+            <div class="ls-item" onclick="navTo('ai')"><span class="ls-dot" style="background:#8B7EB5"></span>AI 智能助手</div>
+            <div class="ls-item" onclick="navTo('ai')"><span class="ls-dot" style="background:#8B7EB5"></span>自然语言取数</div>
+            <div class="ls-item" onclick="navTo('ai')"><span class="ls-dot" style="background:#8B7EB5"></span>实验报告生成</div>
+            <div class="ls-sub">权限</div>
             <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>权限管理中心</div>
             <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>成员管理</div>
-            <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>角色管理</div>
-            <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>审批流程</div>
             <div class="ls-sub">系统</div>
             <div class="ls-item" onclick="showToast('跳转到告警中心')"><span class="ls-dot" style="background:#A0A5B0"></span>告警中心</div>
             <div class="ls-item" onclick="showToast('跳转到系统设置')"><span class="ls-dot" style="background:#A0A5B0"></span>系统设置</div>
-            <div class="ls-item" onclick="showToast('跳转到操作日志')"><span class="ls-dot" style="background:#A0A5B0"></span>操作日志</div>
           </div>
         </div>
       </div>
@@ -465,7 +475,8 @@ const PI = {
   adhoc: `<svg viewBox="0 0 24 24"><path d="M13 2L5 13h4.5l-2 9 8-11h-4.5l2-9z" fill="#fff"/></svg>`,
   abtest: `<svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17" cy="17" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><line x1="10.5" y1="8.5" x2="13.5" y2="15.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,
   cdp: `<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,
-  permission: `<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M8 11V8a4 4 0 118 0v3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.8" fill="#fff"/></svg>`
+  permission: `<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M8 11V8a4 4 0 118 0v3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.8" fill="#fff"/></svg>`,
+  ai: `<svg viewBox="0 0 24 24"><polygon points="12,2 14.5,9 22,9 16,13.5 18,21 12,16.5 6,21 8,13.5 2,9 9.5,9" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>`
 };
 
 /* ═══ MODULE ICONS (18x18 viewBox) ═══════════════════ */
@@ -521,14 +532,17 @@ const PLATFORMS = {
     modules:[{ik:'tag',n:'用户标签',d:'沉淀 1000+ 用户属性与行为标签，支持自定义标签规则与定时更新。'},{ik:'user',n:'人群圈选',d:'基于标签组合圈选目标人群，支持实时预估人群规模。'},{ik:'user',n:'用户画像',d:'多维度可视化用户画像，呈现年龄、地域、活跃度、偏好等分布。'},{ik:'chart',n:'行为分析',d:'分析不同人群的行为路径差异，识别高价值用户特征。'},{ik:'download',n:'人群导出',d:'一键导出圈定人群的设备 ID，对接推送、广告投放等下游系统。'},{ik:'refresh',n:'人群同步',d:'定时同步人群至第三方平台（短信/Push/广告），实现自动化触达。'}]},
   permission: { id:'permission', name:'权限管理中心', category:'权限', iconSvg:PI.permission, iconBg:'#8A8E95', badgeBg:'#EEEEEF', badgeColor:'#555A60', color:'#8A8E95',
     desc:'统一管理 X-Data 所有平台的成员权限与数据访问控制，支持基于角色的权限分配、自助申请审批流程与权限使用看板，保障数据安全合规。',
-    modules:[{ik:'user',n:'成员管理',d:'统一管理各平台成员账号，支持批量导入与部门组织架构同步。'},{ik:'check',n:'角色权限',d:'预置多级角色模板（管理员/分析师/只读等），支持自定义权限组合。'},{ik:'doc',n:'权限申请',d:'员工自助发起数据权限申请，自动路由至负责人审批。'},{ik:'check',n:'审批流程',d:'可配置多级审批链路，支持超时自动提醒与代理审批。'},{ik:'doc',n:'访问日志',d:'记录所有数据访问行为，支持合规审计与异常访问追溯。'},{ik:'eye',n:'数据脱敏',d:'对敏感字段进行动态脱敏展示，最小化数据暴露风险。'}]}
+    modules:[{ik:'user',n:'成员管理',d:'统一管理各平台成员账号，支持批量导入与部门组织架构同步。'},{ik:'check',n:'角色权限',d:'预置多级角色模板（管理员/分析师/只读等），支持自定义权限组合。'},{ik:'doc',n:'权限申请',d:'员工自助发起数据权限申请，自动路由至负责人审批。'},{ik:'check',n:'审批流程',d:'可配置多级审批链路，支持超时自动提醒与代理审批。'},{ik:'doc',n:'访问日志',d:'记录所有数据访问行为，支持合规审计与异常访问追溯。'},{ik:'eye',n:'数据脱敏',d:'对敏感字段进行动态脱敏展示，最小化数据暴露风险。'}]},
+  ai: { id:'ai', name:'X-Data AI 智能助手', category:'AI', iconSvg:PI.ai, iconBg:'#8B7EB5', badgeBg:'#EBE2F0', badgeColor:'#6A4E85', color:'#8B7EB5',
+    desc:'基于大语言模型的智能数据助手，支持自然语言取数、智能数据解读、A/B 实验报告自动生成与数据问答，让每个人都能「说人话」查数据。',
+    modules:[{ik:'code',n:'自然语言取数',d:'用自然语言描述需求，AI 自动生成并执行 SQL，查询结果直接可视化展示。'},{ik:'search',n:'智能数据分析',d:'对查询结果自动进行趋势分析、异常检测与归因探索，无需手写分析逻辑。'},{ik:'doc',n:'实验报告生成',d:'对接 A/B 实验平台，自动汇总实验结果并生成标准化实验分析报告。'},{ik:'chart',n:'自动图表',d:'AI 智能推荐最佳可视化图表类型，一键生成符合业务习惯的数据图表。'},{ik:'refresh',n:'数据解读',d:'对任意数据指标提供自然语言解读，解释波动原因与业务含义。'},{ik:'bell',n:'智能问答',d:'基于数据知识库的智能问答，支持指标口径查询与数据问题即时解答。'}]}
 };
 
 /* ═══ RENDER PLATFORM CARDS ═══════════════════════════ */
 function renderPortalCards() {
   const el = document.getElementById('portalView');
-  const themes = ['t-int','t-gov','t-trk','t-ast','t-mtr','t-anl','t-app','t-cdp','t-prm'];
-  const ids = ['integration','governance','tracking','asset','metric','adhoc','abtest','cdp','permission'];
+  const themes = ['t-int','t-gov','t-trk','t-ast','t-mtr','t-anl','t-app','t-cdp','t-prm','t-ai'];
+  const ids = ['integration','governance','tracking','asset','metric','adhoc','abtest','cdp','permission','ai'];
   el.innerHTML = ids.map((id,i)=>{
     const p = PLATFORMS[id];
     return `<div class="${themes[i]}" onclick="navTo('${id}')">
@@ -549,9 +563,10 @@ function renderPortalCards() {
 
 /* ═══ NAVIGATION ═════════════════════════════════════ */
 const NAV_TAB_MAP = {
-  integration:'ntIntegration',governance:'ntGovernance',tracking:'ntGovernance',
-  asset:'ntAsset',metric:'ntAsset',adhoc:'ntAnalysis',
-  abtest:'ntApplication',cdp:'ntApplication',permission:'ntPermission',
+  integration:'ntIntegration',tracking:'ntTracking',
+  governance:'ntAssetQuality',asset:'ntAssetQuality',metric:'ntAssetQuality',
+  adhoc:'ntAnalysis',abtest:'ntApplication',cdp:'ntApplication',
+  ai:'ntAI',permission:'ntPermission',
 };
 
 function goHome() {
@@ -603,7 +618,7 @@ function navTo(platformId) {
 }
 
 function setNavTab(activeId) {
-  ['ntHome','ntIntegration','ntGovernance','ntAsset','ntAnalysis','ntApplication','ntPermission']
+  ['ntHome','ntIntegration','ntTracking','ntAssetQuality','ntAnalysis','ntApplication','ntAI','ntPermission']
     .forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',id===activeId);});
 }
 
