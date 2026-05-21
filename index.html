@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>X-Data · 数据平台门户</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --nav-h: 56px;
+    --bg: #E8ECF1;
+    --text: #2C3E50;
+    --text-secondary: #5A6C7D;
+    --text-muted: #8E9BAE;
+    --shadow-light: 255,255,255;
+    --shadow-dark: 160,175,195;
+    --accent: #6B8BA0;
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+  }
+
+  body {
+    font-family: -apple-system, "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: var(--bg); display: flex; align-items: center;
+    padding: 0 20px; z-index: 1000;
+    box-shadow: 0 1px 0 rgba(var(--shadow-dark),0.2);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.3px; margin-right: 28px; cursor: pointer;
+    text-decoration: none; flex-shrink: 0;
+  }
+  .nav-logo-icon {
+    width: 36px; height: 36px;
+    background: var(--accent); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.9), 3px 3px 6px rgba(var(--shadow-dark),0.5);
+  }
+  .nav-logo-icon svg { width: 20px; height: 20px; }
+  .nav-tabs { display: flex; align-items: center; height: 100%; flex: 1; gap: 2px; }
+  .nav-tab {
+    position: relative; display: flex; align-items: center;
+    padding: 8px 18px; font-size: 13px; font-weight: 600;
+    color: var(--text-secondary); cursor: pointer; user-select: none;
+    transition: all 0.2s; white-space: nowrap; border-radius: var(--radius-sm);
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active {
+    color: var(--accent); background: var(--bg);
+    box-shadow: inset 3px 3px 6px rgba(var(--shadow-dark),0.3), inset -3px -3px 6px rgba(var(--shadow-light),0.9);
+  }
+  .nav-tab-arrow { margin-left: 3px; font-size: 10px; }
+
+  .mega-menu {
+    position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    min-width: 680px; background: var(--bg); border-radius: var(--radius-lg);
+    box-shadow: -8px -8px 18px rgba(var(--shadow-light),0.9), 8px 8px 18px rgba(var(--shadow-dark),0.4);
+    padding: 18px 22px 16px; display: none; z-index: 999;
+    animation: slideDown 0.2s ease;
+  }
+  @keyframes slideDown { from { opacity:0; transform:translateX(-50%) translateY(-6px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+  .nav-tab:hover .mega-menu { display: flex; gap: 30px; }
+  .mega-col { display: flex; flex-direction: column; gap: 2px; min-width: 85px; }
+  .mega-col-title { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; padding-bottom: 6px; }
+  .mega-item {
+    display: flex; align-items: center; gap: 7px; padding: 7px 10px;
+    border-radius: 8px; color: var(--text-secondary); font-size: 13px;
+    cursor: pointer; text-decoration: none; transition: all 0.15s;
+  }
+  .mega-item:hover {
+    color: var(--accent);
+    box-shadow: inset 3px 3px 6px rgba(var(--shadow-dark),0.2), inset -3px -3px 6px rgba(var(--shadow-light),0.8);
+  }
+  .mega-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  .nav-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
+  .nav-search {
+    display: flex; align-items: center; gap: 7px;
+    padding: 7px 14px; background: var(--bg);
+    border-radius: 20px; color: var(--text-muted); font-size: 13px;
+    cursor: text; width: 200px; transition: all 0.15s;
+    box-shadow: inset 3px 3px 6px rgba(var(--shadow-dark),0.3), inset -3px -3px 6px rgba(var(--shadow-light),0.9);
+  }
+  .nav-icon-btn {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text-secondary); transition: all 0.15s;
+  }
+  .nav-icon-btn:hover { box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.9), 3px 3px 6px rgba(var(--shadow-dark),0.4); }
+  .nav-icon-btn:active { box-shadow: inset 3px 3px 6px rgba(var(--shadow-dark),0.3), inset -3px -3px 6px rgba(var(--shadow-light),0.8); transform: scale(0.95); }
+  .nav-avatar {
+    width: 32px; height: 32px; background: #6B8BA0; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px; font-weight: 700; cursor: pointer;
+    box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.9), 3px 3px 6px rgba(var(--shadow-dark),0.5);
+  }
+
+  /* ─── MAIN ─── */
+  .main { margin-top: var(--nav-h); padding: 24px 32px 48px; max-width: 1380px; margin-left: auto; margin-right: auto; }
+
+  .hero-band {
+    background: var(--bg); border-radius: var(--radius-xl);
+    padding: 32px 40px; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: -8px -8px 18px rgba(var(--shadow-light),0.9), 8px 8px 18px rgba(var(--shadow-dark),0.4);
+  }
+  .hero-text h1 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.4px; }
+  .hero-text h1 span { color: var(--accent); }
+  .hero-text p { font-size: 14px; color: var(--text-secondary); max-width: 480px; line-height: 1.7; }
+  .hero-stats { display: flex; gap: 40px; }
+  .hero-stat { text-align: center; }
+  .hero-stat-val { font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 5px; color: var(--accent); }
+  .hero-stat-label { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+
+  .view-tabs {
+    display: inline-flex; align-items: center; gap: 2px;
+    margin-bottom: 20px; background: var(--bg);
+    border-radius: 12px; padding: 4px;
+    box-shadow: inset 4px 4px 8px rgba(var(--shadow-dark),0.35), inset -4px -4px 8px rgba(var(--shadow-light),0.8);
+  }
+  .view-tab {
+    padding: 8px 22px; border-radius: 10px;
+    font-size: 13.5px; font-weight: 600; color: var(--text-secondary);
+    cursor: pointer; transition: all 0.2s; user-select: none;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .view-tab:hover { color: var(--text); }
+  .view-tab.active {
+    color: var(--accent); background: var(--bg);
+    box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.9), 3px 3px 6px rgba(var(--shadow-dark),0.35);
+  }
+
+  /* ─── PORTAL GRID ─── */
+  #portalView { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+
+  .platform-card {
+    background: var(--bg); border-radius: var(--radius-lg);
+    padding: 20px 20px 16px; cursor: pointer;
+    transition: all 0.25s ease; text-decoration: none;
+    display: flex; flex-direction: column;
+    box-shadow: -6px -6px 14px rgba(var(--shadow-light),0.9), 6px 6px 14px rgba(var(--shadow-dark),0.4);
+  }
+  .platform-card:hover { box-shadow: -8px -8px 18px rgba(var(--shadow-light),1), 8px 8px 18px rgba(var(--shadow-dark),0.5); transform: translateY(-2px); }
+  .platform-card:active { box-shadow: inset 4px 4px 10px rgba(var(--shadow-dark),0.35), inset -4px -4px 10px rgba(var(--shadow-light),0.9); transform: translateY(0) scale(0.985); transition: all 0.1s; }
+
+  .pc-hd { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .pc-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: -4px -4px 8px rgba(var(--shadow-light),0.8), 4px 4px 8px rgba(var(--shadow-dark),0.4);
+  }
+  .pc-icon svg { width: 22px; height: 22px; }
+  .pc-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; line-height: 1.3; }
+  .pc-badge { display: inline-flex; align-items: center; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; }
+  .pc-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+  .pc-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pc-tag {
+    font-size: 11.5px; padding: 3px 10px; border-radius: 6px;
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+    box-shadow: -2px -2px 4px rgba(var(--shadow-light),0.8), 2px 2px 4px rgba(var(--shadow-dark),0.2);
+  }
+  .pc-tag:hover { color: var(--accent); box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.9), 3px 3px 6px rgba(var(--shadow-dark),0.3); }
+  .pc-tag:active { box-shadow: inset 2px 2px 4px rgba(var(--shadow-dark),0.25), inset -2px -2px 4px rgba(var(--shadow-light),0.7); }
+
+  /* Color themes — desaturated */
+  .t-int .pc-icon { background: #6B9E7A; }
+  .t-int .pc-badge { background: #E2EBE4; color: #4A6A44; }
+  .t-gov .pc-icon { background: #C4925A; }
+  .t-gov .pc-badge { background: #F2EAE0; color: #8A6A3E; }
+  .t-trk .pc-icon { background: #8E7AB5; }
+  .t-trk .pc-badge { background: #ECE2F0; color: #5E4280; }
+  .t-ast .pc-icon { background: #5A7FA0; }
+  .t-ast .pc-badge { background: #E1EAF0; color: #405A75; }
+  .t-mtr .pc-icon { background: #6B8FAD; }
+  .t-mtr .pc-badge { background: #E2ECF2; color: #456078; }
+  .t-anl .pc-icon { background: #7AA5B0; }
+  .t-anl .pc-badge { background: #E1ECEE; color: #426870; }
+  .t-app .pc-icon { background: #B5737A; }
+  .t-app .pc-badge { background: #F0E2E4; color: #7A5058; }
+  .t-cdp .pc-icon { background: #A08C6E; }
+  .t-cdp .pc-badge { background: #F0EAE0; color: #7A5832; }
+  .t-prm .pc-icon { background: #8A8E95; }
+  .t-prm .pc-badge { background: #EEEEEF; color: #555A60; }
+
+  /* ─── LANDSCAPE VIEW ─── */
+  .landscape-header { margin-bottom: 20px; }
+  .landscape-header h2 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .landscape-header p { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
+
+  .landscape-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .landscape-col-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; color: var(--text);
+    padding: 12px 16px; background: var(--bg);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.8), 3px 3px 6px rgba(var(--shadow-dark),0.3);
+  }
+  .landscape-col-body {
+    background: var(--bg); border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: 6px 0;
+    box-shadow: 0 2px 0 rgba(var(--shadow-light),0.6), inset 0 1px 3px rgba(var(--shadow-dark),0.1);
+  }
+  .ls-sub { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 16px 4px; margin-top: 4px; }
+  .ls-sub:first-child { margin-top: 0; }
+  .ls-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 16px; font-size: 13px; color: var(--text-secondary);
+    cursor: pointer; transition: all 0.15s; border-radius: 6px; margin: 1px 8px;
+  }
+  .ls-item:hover { color: var(--accent); box-shadow: inset 3px 3px 6px rgba(var(--shadow-dark),0.15), inset -3px -3px 6px rgba(var(--shadow-light),0.7); }
+  .ls-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── PLATFORM DETAIL PAGE ─── */
+  #detailView { display: none; }
+  #detailView.active { display: block; }
+
+  .detail-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13.5px; color: var(--text); cursor: pointer;
+    margin-bottom: 20px; padding: 9px 20px;
+    background: var(--bg); border-radius: var(--radius-sm);
+    font-weight: 600; transition: all 0.15s;
+    box-shadow: -4px -4px 10px rgba(var(--shadow-light),0.9), 4px 4px 10px rgba(var(--shadow-dark),0.35);
+  }
+  .detail-back:hover { box-shadow: -5px -5px 12px rgba(var(--shadow-light),1), 5px 5px 12px rgba(var(--shadow-dark),0.45); transform: translateX(-2px); }
+  .detail-back:active { box-shadow: inset 3px 3px 8px rgba(var(--shadow-dark),0.3), inset -3px -3px 8px rgba(var(--shadow-light),0.8); transform: translateX(-2px) scale(0.97); }
+
+  .detail-hero {
+    background: var(--bg); border-radius: var(--radius-xl);
+    padding: 36px 44px; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 32px;
+    box-shadow: -8px -8px 18px rgba(var(--shadow-light),0.9), 8px 8px 18px rgba(var(--shadow-dark),0.4);
+  }
+  .detail-hero-icon {
+    width: 72px; height: 72px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    box-shadow: -5px -5px 12px rgba(var(--shadow-light),0.8), 5px 5px 12px rgba(var(--shadow-dark),0.4);
+  }
+  .detail-hero-icon svg { width: 36px; height: 36px; }
+  .detail-hero-text h1 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.3px; }
+  .detail-hero-text p { font-size: 14px; color: var(--text-secondary); max-width: 560px; line-height: 1.7; }
+  .detail-hero-badge {
+    display: inline-flex; align-items: center;
+    margin-bottom: 10px; font-size: 12px; font-weight: 700;
+    padding: 3px 14px; border-radius: 20px; letter-spacing: 0.04em;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.06), inset -2px -2px 4px rgba(255,255,255,0.6);
+  }
+
+  .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .detail-module {
+    background: var(--bg); border-radius: var(--radius-lg);
+    padding: 22px; cursor: pointer; transition: all 0.25s;
+    box-shadow: -5px -5px 12px rgba(var(--shadow-light),0.9), 5px 5px 12px rgba(var(--shadow-dark),0.35);
+  }
+  .detail-module:hover { box-shadow: -7px -7px 16px rgba(var(--shadow-light),1), 7px 7px 16px rgba(var(--shadow-dark),0.45); transform: translateY(-2px); }
+  .detail-module:active { box-shadow: inset 3px 3px 8px rgba(var(--shadow-dark),0.3), inset -3px -3px 8px rgba(var(--shadow-light),0.8); transform: scale(0.985); transition: all 0.1s; }
+
+  .dm-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    box-shadow: -3px -3px 6px rgba(var(--shadow-light),0.7), 3px 3px 6px rgba(var(--shadow-dark),0.3);
+  }
+  .dm-icon svg { width: 17px; height: 17px; }
+  .detail-module-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .detail-module-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; }
+
+  .detail-entry-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 30px; border-radius: 14px;
+    font-size: 14.5px; font-weight: 700; color: var(--accent);
+    background: var(--bg); border: none;
+    cursor: pointer; transition: all 0.2s;
+    box-shadow: -5px -5px 12px rgba(var(--shadow-light),0.9), 5px 5px 12px rgba(var(--shadow-dark),0.4);
+  }
+  .detail-entry-btn:hover { color: #5A7890; box-shadow: -7px -7px 16px rgba(var(--shadow-light),1), 7px 7px 16px rgba(var(--shadow-dark),0.5); transform: translateY(-1px); }
+  .detail-entry-btn:active { color: #4A6880; box-shadow: inset 4px 4px 10px rgba(var(--shadow-dark),0.35), inset -4px -4px 10px rgba(var(--shadow-light),0.9); transform: translateY(0) scale(0.98); }
+
+  .footer { margin-top: 24px; padding-top: 20px; display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); }
+
+  .toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px);
+    background: var(--bg); color: var(--text); font-weight: 600;
+    padding: 12px 24px; border-radius: 24px; font-size: 13.5px;
+    opacity: 0; pointer-events: none; transition: all 0.3s ease;
+    z-index: 9999; white-space: nowrap;
+    box-shadow: -6px -6px 14px rgba(var(--shadow-light),0.9), 6px 6px 14px rgba(var(--shadow-dark),0.4);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 1200px) { #portalView { grid-template-columns: repeat(3, 1fr); } .landscape-grid { grid-template-columns: repeat(2, 1fr); } .detail-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { #portalView { grid-template-columns: repeat(2, 1fr); } .nav-tabs { display: none; } }
+  @media (max-width: 640px) { .main { padding: 16px; } #portalView { grid-template-columns: 1fr; } .landscape-grid { grid-template-columns: 1fr; } .detail-grid { grid-template-columns: 1fr; } .hero-stats { display: none; } .hero-band { padding: 24px; } .detail-hero { padding: 28px; flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo" onclick="goHome()">
+    <div class="nav-logo-icon"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="13.5" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.5"/><circle cx="18" cy="4.5" r="1.2" fill="#fff" opacity="0.55"/><circle cx="18" cy="31.5" r="1.2" fill="#fff" opacity="0.55"/><circle cx="4.5" cy="18" r="1.2" fill="#fff" opacity="0.55"/><circle cx="31.5" cy="18" r="1.2" fill="#fff" opacity="0.55"/><line x1="10" y1="10" x2="26" y2="26" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><line x1="26" y1="10" x2="10" y2="26" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/><circle cx="18" cy="18" r="2.5" fill="#fff"/></svg></div>
+    数据中心
+  </div>
+
+  <div class="nav-tabs">
+    <div class="nav-tab active" id="ntHome" onclick="goHome()">
+      全景<span class="nav-tab-arrow">›</span>
+      <div class="mega-menu">
+        <div class="mega-col"><div class="mega-col-title">集成</div><a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#6B9E7A"></span>XDAP 平台</a></div>
+        <div class="mega-col"><div class="mega-col-title">治理</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#C4925A"></span>DQC 数据质量</a></div>
+        <div class="mega-col"><div class="mega-col-title">埋点</div><a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#8E7AB5"></span>迅数平台</a></div>
+        <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#5A7FA0"></span>数据资产平台</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#6B8FAD"></span>指标平台</a></div>
+        <div class="mega-col"><div class="mega-col-title">分析</div><a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#7AA5B0"></span>AdHoc 查询</a></div>
+        <div class="mega-col"><div class="mega-col-title">应用</div><a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#B5737A"></span>A/B 实验</a><a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#A08C6E"></span>CDP 画像</a></div>
+        <div class="mega-col"><div class="mega-col-title">权限</div><a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8A8E95"></span>权限管理中心</a></div>
+      </div>
+    </div>
+    <div class="nav-tab" id="ntIntegration" onclick="navTo('integration')">数据集成</div>
+    <div class="nav-tab" id="ntGovernance"  onclick="navTo('governance')">数据治理</div>
+    <div class="nav-tab" id="ntAsset"       onclick="navTo('asset')">数据资产</div>
+    <div class="nav-tab" id="ntAnalysis"    onclick="navTo('adhoc')">分析</div>
+    <div class="nav-tab" id="ntApplication" onclick="navTo('abtest')">应用</div>
+    <div class="nav-tab" id="ntPermission"  onclick="navTo('permission')">权限</div>
+  </div>
+
+  <div class="nav-actions">
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      搜索平台、功能、文档…
+    </div>
+    <div class="nav-icon-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </div>
+    <div class="nav-avatar">X</div>
+  </div>
+</nav>
+
+<main class="main">
+  <div id="homeView">
+    <div class="hero-band">
+      <div class="hero-text"><h1><span>X-Data</span> · 一站式数据平台</h1><p>整合数据集成、治理、资产、分析与应用，打造迅雷数据全链路智能化平台，让每一个数据决策都有迹可循。</p></div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val">8+</div><div class="hero-stat-label">核心平台</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">200+</div><div class="hero-stat-label">数据指标</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">全链路</div><div class="hero-stat-label">数据闭环</div></div>
+      </div>
+    </div>
+
+    <div class="view-tabs">
+      <div class="view-tab active" id="vtPortal" onclick="switchHomeView('portal')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        产品矩阵
+      </div>
+      <div class="view-tab" id="vtLandscape" onclick="switchHomeView('landscape')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3" cy="6" r="1" fill="currentColor"/><circle cx="3" cy="12" r="1" fill="currentColor"/><circle cx="3" cy="18" r="1" fill="currentColor"/></svg>
+        全景视图
+      </div>
+    </div>
+
+    <div id="portalView"><!-- platform cards rendered by JS --></div>
+
+    <div id="landscapeView" style="display:none">
+      <div class="landscape-header"><h2>产品全景视图</h2><p>X-Data 平台所有产品矩阵一览，点击功能项可直接跳转对应平台</p></div>
+      <div class="landscape-grid">
+        <div>
+          <div class="landscape-col-title"><span style="color:#6B9E7A">●</span> 数据开发建设</div>
+          <div class="landscape-col-body">
+            <div class="ls-sub">集成</div>
+            <div class="ls-item" onclick="navTo('integration')"><span class="ls-dot" style="background:#6B9E7A"></span>XDAP 数据集成</div>
+            <div class="ls-item" onclick="navTo('integration')"><span class="ls-dot" style="background:#6B9E7A"></span>任务调度</div>
+            <div class="ls-item" onclick="navTo('integration')"><span class="ls-dot" style="background:#6B9E7A"></span>任务运维</div>
+            <div class="ls-sub">埋点</div>
+            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#8E7AB5"></span>迅数平台</div>
+            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#8E7AB5"></span>埋点管理</div>
+            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#8E7AB5"></span>事件分析</div>
+          </div>
+        </div>
+        <div>
+          <div class="landscape-col-title"><span style="color:#C4925A">●</span> 资产治理管理</div>
+          <div class="landscape-col-body">
+            <div class="ls-sub">治理</div>
+            <div class="ls-item" onclick="navTo('governance')"><span class="ls-dot" style="background:#C4925A"></span>DQC 数据质量</div>
+            <div class="ls-item" onclick="navTo('governance')"><span class="ls-dot" style="background:#C4925A"></span>异常检测</div>
+            <div class="ls-item" onclick="navTo('governance')"><span class="ls-dot" style="background:#C4925A"></span>质量报告</div>
+            <div class="ls-sub">资产</div>
+            <div class="ls-item" onclick="navTo('asset')"><span class="ls-dot" style="background:#5A7FA0"></span>数据资产平台</div>
+            <div class="ls-item" onclick="navTo('asset')"><span class="ls-dot" style="background:#5A7FA0"></span>元数据管理</div>
+            <div class="ls-item" onclick="navTo('asset')"><span class="ls-dot" style="background:#5A7FA0"></span>数据血缘</div>
+            <div class="ls-item" onclick="navTo('metric')"><span class="ls-dot" style="background:#6B8FAD"></span>指标平台</div>
+          </div>
+        </div>
+        <div>
+          <div class="landscape-col-title"><span style="color:#7AA5B0">●</span> 分析与应用</div>
+          <div class="landscape-col-body">
+            <div class="ls-sub">分析</div>
+            <div class="ls-item" onclick="navTo('adhoc')"><span class="ls-dot" style="background:#7AA5B0"></span>AdHoc 即席查询</div>
+            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#8E7AB5"></span>漏斗分析</div>
+            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#8E7AB5"></span>留存分析</div>
+            <div class="ls-sub">应用</div>
+            <div class="ls-item" onclick="navTo('abtest')"><span class="ls-dot" style="background:#B5737A"></span>A/B 实验平台</div>
+            <div class="ls-item" onclick="navTo('cdp')"><span class="ls-dot" style="background:#A08C6E"></span>CDP 用户画像</div>
+          </div>
+        </div>
+        <div>
+          <div class="landscape-col-title"><span style="color:#8A8E95">●</span> 管理中心</div>
+          <div class="landscape-col-body">
+            <div class="ls-sub">权限管控</div>
+            <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>权限管理中心</div>
+            <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>成员管理</div>
+            <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>角色管理</div>
+            <div class="ls-item" onclick="navTo('permission')"><span class="ls-dot" style="background:#8A8E95"></span>审批流程</div>
+            <div class="ls-sub">系统</div>
+            <div class="ls-item" onclick="showToast('跳转到告警中心')"><span class="ls-dot" style="background:#A0A5B0"></span>告警中心</div>
+            <div class="ls-item" onclick="showToast('跳转到系统设置')"><span class="ls-dot" style="background:#A0A5B0"></span>系统设置</div>
+            <div class="ls-item" onclick="showToast('跳转到操作日志')"><span class="ls-dot" style="background:#A0A5B0"></span>操作日志</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer"><span>X-Data 数据平台 · 数据智能基础设施</span><span>v2.0 · 2026</span></div>
+  </div>
+
+  <div id="detailView"></div>
+</main>
+
+<div class="toast" id="toastEl"></div>
+
+<script>
+/* ═══ PLATFORM SVG ICONS ═══════════════════════════════ */
+const PI = {
+  integration: `<svg viewBox="0 0 24 24"><rect x="2" y="3" width="9" height="9" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/><rect x="13" y="12" width="9" height="9" rx="2.5" fill="none" stroke="#fff" stroke-width="2"/><line x1="11" y1="7.5" x2="15" y2="14" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>`,
+  governance: `<svg viewBox="0 0 24 24"><path d="M12 2L4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6L12 2z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M8 12l3 3 5-5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  tracking: `<svg viewBox="0 0 24 24"><rect x="3" y="13" width="4" height="8" rx="1.5" fill="#fff" opacity=".85"/><rect x="10" y="7" width="4" height="14" rx="1.5" fill="#fff"/><rect x="17" y="3" width="4" height="18" rx="1.5" fill="#fff" opacity=".75"/></svg>`,
+  asset: `<svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3" fill="none" stroke="#fff" stroke-width="2"/><path d="M4 5v4c0 1.7 3.6 3 8 3s8-1.3 8-3V5" fill="none" stroke="#fff" stroke-width="2"/><path d="M4 9v4c0 1.7 3.6 3 8 3s8-1.3 8-3V9" fill="none" stroke="#fff" stroke-width="2"/><path d="M4 13v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4" fill="none" stroke="#fff" stroke-width="2"/></svg>`,
+  metric: `<svg viewBox="0 0 24 24"><line x1="7" y1="5" x2="7" y2="19" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="17" y1="5" x2="17" y2="19" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><line x1="3" y1="9" x2="21" y2="9" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="3" y1="15" x2="21" y2="15" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,
+  adhoc: `<svg viewBox="0 0 24 24"><path d="M13 2L5 13h4.5l-2 9 8-11h-4.5l2-9z" fill="#fff"/></svg>`,
+  abtest: `<svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17" cy="17" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><line x1="10.5" y1="8.5" x2="13.5" y2="15.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,
+  cdp: `<svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,
+  permission: `<svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="2"/><path d="M8 11V8a4 4 0 118 0v3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.8" fill="#fff"/></svg>`
+};
+
+/* ═══ MODULE ICONS (18x18 viewBox) ═══════════════════ */
+const MI = {};
+(function buildMI(){
+  const gen = (d) => `<svg viewBox="0 0 18 18">${d}</svg>`;
+  MI.cog     = gen(`<path d="M9 2l1.2 2.5 2.8.4-.6 2.7 2 1.8-1.3 2.4-2.6-.7-1.1 2.4H7l-1.2-2.5-2.8-.4.6-2.7-2-1.8 1.3-2.4L5.5 9 6.6 6.6z" fill="COLOR"/><circle cx="12.5" cy="6" r="2.5" fill="COLOR"/>`);
+  MI.clock   = gen(`<circle cx="9" cy="9" r="7" fill="none" stroke="COLOR" stroke-width="2"/><polyline points="9,4.5 9,9 13,11" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`);
+  MI.refresh = gen(`<path d="M1 5v4h4" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 13v-4h-4" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 3.5A7 7 0 0014.5 14.5 7 7 0 003.5 14.5" fill="none" stroke="COLOR" stroke-width="2"/><path d="M3.5 14.5A7 7 0 0014.5 3.5" fill="none" stroke="COLOR" stroke-width="2"/>`);
+  MI.bell    = gen(`<path d="M14 6a5 5 0 00-10 0c0 6-2 8-2 8h14s-2-2-2-8" fill="none" stroke="COLOR" stroke-width="2" stroke-linejoin="round"/><path d="M10.5 16.5a1.5 1.5 0 002.8 0" fill="none" stroke="COLOR" stroke-width="2"/>`);
+  MI.doc     = gen(`<path d="M5 2h5l5 5v9a1.5 1.5 0 01-1.5 1.5h-7A1.5 1.5 0 013 16V3.5A1.5 1.5 0 014.5 2z" fill="none" stroke="COLOR" stroke-width="1.8" stroke-linejoin="round"/><polyline points="10,2 10,7 15,7" fill="none" stroke="COLOR" stroke-width="1.8" stroke-linejoin="round"/><line x1="6" y1="11" x2="12" y2="11" stroke="COLOR" stroke-width="1.5" stroke-linecap="round"/><line x1="6" y1="14" x2="10" y2="14" stroke="COLOR" stroke-width="1.5" stroke-linecap="round"/>`);
+  MI.chart   = gen(`<line x1="3" y1="16" x2="7" y2="10" stroke="COLOR" stroke-width="2" stroke-linecap="round"/><line x1="7" y1="16" x2="11" y2="4" stroke="COLOR" stroke-width="2" stroke-linecap="round"/><line x1="11" y1="16" x2="15" y2="7" stroke="COLOR" stroke-width="2" stroke-linecap="round"/>`);
+  MI.search  = gen(`<circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="COLOR" stroke-width="2"/><line x1="11.5" y1="11.5" x2="16.5" y2="16.5" stroke="COLOR" stroke-width="2" stroke-linecap="round"/>`);
+  MI.tag     = gen(`<path d="M2 9V2h7l7 7-7 7z" fill="none" stroke="COLOR" stroke-width="2" stroke-linejoin="round"/><circle cx="6.5" cy="6.5" r="1" fill="none" stroke="COLOR" stroke-width="1.5"/>`);
+  MI.user    = gen(`<circle cx="9" cy="5.5" r="3.5" fill="none" stroke="COLOR" stroke-width="2"/><path d="M2 16.5c0-3.9 3.1-7 7-7s7 3.1 7 7" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round"/>`);
+  MI.lock    = gen(`<rect x="3" y="8" width="12" height="8" rx="2" fill="none" stroke="COLOR" stroke-width="2"/><path d="M6 8V5.5a3 3 0 116 0V8" stroke="COLOR" stroke-width="2" fill="none" stroke-linecap="round"/>`);
+  MI.code    = gen(`<polyline points="4,5 1,9 4,13" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,5 17,9 14,13" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="4" x2="10" y2="14" stroke="COLOR" stroke-width="2" stroke-linecap="round"/>`);
+  MI.folder  = gen(`<path d="M2 4.5h6l2 2h6a1.5 1.5 0 011.5 1.5v6a1.5 1.5 0 01-1.5 1.5H3.5A1.5 1.5 0 012 14V4.5z" fill="none" stroke="COLOR" stroke-width="1.8" stroke-linejoin="round"/>`);
+  MI.target  = gen(`<circle cx="9" cy="9" r="7" fill="none" stroke="COLOR" stroke-width="2"/><circle cx="9" cy="9" r="3.5" fill="none" stroke="COLOR" stroke-width="2"/><circle cx="9" cy="9" r="1.2" fill="COLOR"/>`);
+  MI.funnel  = gen(`<path d="M1 2h16l-6 6v5l-4 2v-7z" fill="none" stroke="COLOR" stroke-width="2" stroke-linejoin="round"/>`);
+  MI.network = gen(`<circle cx="4" cy="4" r="2" fill="none" stroke="COLOR" stroke-width="1.8"/><circle cx="14" cy="4" r="2" fill="none" stroke="COLOR" stroke-width="1.8"/><circle cx="9" cy="14" r="2" fill="none" stroke="COLOR" stroke-width="1.8"/><line x1="5.5" y1="5.5" x2="12.5" y2="5.5" stroke="COLOR" stroke-width="1.5"/><line x1="5.5" y1="5.5" x2="8" y2="12.5" stroke="COLOR" stroke-width="1.5"/><line x1="13" y1="5.5" x2="10" y2="12.5" stroke="COLOR" stroke-width="1.5"/>`);
+  MI.check   = gen(`<circle cx="9" cy="9" r="7" fill="none" stroke="COLOR" stroke-width="2"/><polyline points="5.5,9 8,11.5 12.5,6.5" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`);
+  MI.download= gen(`<path d="M14 12v4H4v-4" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round"/><polyline points="6,9 9,12 12,9" fill="none" stroke="COLOR" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="9" y1="2" x2="9" y2="12" stroke="COLOR" stroke-width="2" stroke-linecap="round"/>`);
+  MI.eye     = gen(`<path d="M1 9s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6z" fill="none" stroke="COLOR" stroke-width="2"/><circle cx="9" cy="9" r="2.5" fill="none" stroke="COLOR" stroke-width="2"/>`);
+  MI.edit    = gen(`<path d="M13 2l3 3L6 15H3v-3L13 2z" fill="none" stroke="COLOR" stroke-width="2" stroke-linejoin="round"/>`);
+})();
+
+/* ═══ PLATFORMS DATA ══════════════════════════════════ */
+const PLATFORMS = {
+  integration: { id:'integration', name:'XDAP 数据集成平台', category:'数据集成', iconSvg:PI.integration, iconBg:'#6B9E7A', badgeBg:'#E2EBE4', badgeColor:'#4A6A44', color:'#6B9E7A',
+    desc:'迅雷统一数据接入与调度平台，覆盖离线批量、准实时与实时三种数据管道模式，支持 100+ 数据源类型接入，保障数据高效、稳定地沉淀到数据仓库。',
+    modules:[{ik:'target',n:'数据源管理',d:'管理数据库、API、文件等 100+ 种数据源的连接配置与健康状态。'},{ik:'cog',n:'ETL 任务配置',d:'可视化拖拽配置数据抽取、转换、加载流程，无需编码即可完成数据加工。'},{ik:'clock',n:'任务调度',d:'支持 Cron 表达式与依赖调度，智能管理任务执行顺序与优先级。'},{ik:'refresh',n:'实时同步',d:'基于 CDC 技术实现数据库变更数据实时捕获与同步，延迟 < 1s。'},{ik:'bell',n:'监控告警',d:'任务运行状态实时监控，异常自动触发告警通知（钉钉/邮件/短信）。'},{ik:'doc',n:'运行日志',d:'全量任务运行日志记录，支持失败重试、断点续传与问题快速定位。'}]},
+  governance: { id:'governance', name:'DQC 数据质量平台', category:'数据治理', iconSvg:PI.governance, iconBg:'#C4925A', badgeBg:'#F2EAE0', badgeColor:'#8A6A3E', color:'#C4925A',
+    desc:'覆盖数据质量规则配置、自动化检测、异常预警与质量报告的全链路数据治理平台，帮助团队建立可量化、可追踪的数据质量管控体系。',
+    modules:[{ik:'edit',n:'质量规则配置',d:'支持完整性、唯一性、及时性、准确性等多维度质量规则的灵活配置。'},{ik:'search',n:'异常检测',d:'基于规则与统计模型的自动化数据异常检测，支持批次与实时两种模式。'},{ik:'chart',n:'质量报告',d:'可视化质量得分趋势与问题分布，支持按表、按库、按业务域多维聚合。'},{ik:'bell',n:'告警通知',d:'质量问题自动触发多级告警，支持告警分级与责任人指定。'},{ik:'chart',n:'质量趋势',d:'历史质量数据对比分析，识别数据质量改善或劣化趋势。'},{ik:'doc',n:'问题工单',d:'质量问题自动流转工单，记录处理过程与解决方案，形成闭环。'}]},
+  tracking: { id:'tracking', name:'迅数平台', category:'数据埋点与分析', iconSvg:PI.tracking, iconBg:'#8E7AB5', badgeBg:'#ECE2F0', badgeColor:'#5E4280', color:'#8E7AB5',
+    desc:'迅雷自研数据埋点与用户行为分析平台，覆盖全端（iOS/Android/Web/小程序）埋点管理与行为数据分析，支持事件分析、漏斗、留存、路径等多种分析模型。',
+    modules:[{ik:'target',n:'埋点管理',d:'统一管理全端埋点方案，支持可视化埋点与代码埋点，版本化管理埋点文档。'},{ik:'chart',n:'事件分析',d:'自助分析任意埋点事件的趋势、分布、转化，无需 SQL 即可探索数据。'},{ik:'funnel',n:'漏斗分析',d:'定义多步骤转化漏斗，分析各环节流失率，快速定位转化瓶颈。'},{ik:'refresh',n:'留存分析',d:'分析用户次日/7日/30日留存曲线，支持分群对比与留存归因。'},{ik:'network',n:'路径分析',d:'可视化用户在产品中的真实行为路径，发现非预期的核心使用路径。'},{ik:'eye',n:'用户细查',d:'下钻到单用户行为序列，支持用户分群圈选与行为回放。'}]},
+  asset: { id:'asset', name:'数据资产平台', category:'数据资产', iconSvg:PI.asset, iconBg:'#5A7FA0', badgeBg:'#E1EAF0', badgeColor:'#405A75', color:'#5A7FA0',
+    desc:'迅雷统一数据资产管理平台，覆盖数据资产目录、元数据管理与数据血缘全链路追踪，让每一张数据表都有据可查、有责可追。',
+    modules:[{ik:'folder',n:'资产目录',d:'按业务域与数据层次组织数据资产，支持多维度检索与收藏订阅。'},{ik:'tag',n:'元数据管理',d:'管理表、字段的业务含义、负责人、SLA 等元数据，支持批量编辑。'},{ik:'network',n:'数据血缘',d:'可视化展示数据表的上下游血缘图谱，支持字段级血缘追踪。'},{ik:'chart',n:'影响分析',d:'修改前评估变更影响范围，预防因上游变动导致的下游任务失败。'},{ik:'chart',n:'资产消费',d:'统计数据资产的查询次数、使用方、访问频率，识别高价值资产。'},{ik:'bell',n:'资产预警',d:'监控数据表产出延迟、schema 变更等异常，自动推送告警。'}]},
+  metric: { id:'metric', name:'指标平台', category:'数据资产', iconSvg:PI.metric, iconBg:'#6B8FAD', badgeBg:'#E2ECF2', badgeColor:'#456078', color:'#6B8FAD',
+    desc:'迅雷企业级指标管理平台，统一定义业务指标口径、管理指标生产流程，构建标准化的指标体系，彻底解决「数据打架」问题。',
+    modules:[{ik:'edit',n:'指标定义',d:'规范化定义指标名称、口径、业务含义、计算逻辑，支持版本管理。'},{ik:'folder',n:'指标市场',d:'统一检索平台所有指标，支持订阅、收藏与使用申请。'},{ik:'cog',n:'口径管理',d:'管理同一指标在不同业务口径下的计算差异，防止口径混乱。'},{ik:'cog',n:'指标生产',d:'一键将指标定义转化为数据开发任务，实现指标自动化生产。'},{ik:'bell',n:'指标订阅',d:'订阅关键指标异常波动推送，及时感知业务变化。'},{ik:'clock',n:'版本控制',d:'指标定义变更全程记录，支持历史版本查看与回滚。'}]},
+  adhoc: { id:'adhoc', name:'AdHoc 即席查询平台', category:'分析', iconSvg:PI.adhoc, iconBg:'#7AA5B0', badgeBg:'#E1ECEE', badgeColor:'#426870', color:'#7AA5B0',
+    desc:'面向数据分析师与业务人员的交互式查询平台，支持多数据源联查、智能 SQL 补全与结果即时可视化，大幅降低数据探索门槛。',
+    modules:[{ik:'code',n:'SQL 编辑器',d:'功能完备的在线 SQL 编辑器，支持语法高亮、智能补全与格式化。'},{ik:'network',n:'多源联查',d:'跨数据源关联查询，支持 Hive、MySQL、ClickHouse、Doris 等多引擎。'},{ik:'chart',n:'结果可视化',d:'查询结果一键转为图表（折线/柱状/饼图），支持简单看板搭建。'},{ik:'clock',n:'查询历史',d:'保存全量查询历史，支持收藏常用 SQL 与团队共享查询模板。'},{ik:'download',n:'报表导出',d:'支持 CSV、Excel 格式导出，超大结果集分片下载。'},{ik:'lock',n:'权限管控',d:'细粒度的数据源访问权限控制，防止敏感数据越权查询。'}]},
+  abtest: { id:'abtest', name:'A/B 实验平台', category:'应用', iconSvg:PI.abtest, iconBg:'#B5737A', badgeBg:'#F0E2E4', badgeColor:'#7A5058', color:'#B5737A',
+    desc:'迅雷全流程 A/B 实验管理平台，支持实验创建、流量分配、多指标统计检验与实验报告生成，帮助产品与运营团队用数据驱动每一个决策。',
+    modules:[{ik:'cog',n:'实验创建',d:'快速创建 A/B 实验或多变量实验，配置实验分组与变量参数。'},{ik:'target',n:'流量分配',d:'精细化流量切分，支持按用户属性、设备、地域等多维度定向分流。'},{ik:'chart',n:'统计检验',d:'内置 T 检验、CUPED 方差缩减等统计方法，自动计算显著性与置信度。'},{ik:'doc',n:'实验报告',d:'实验效果自动汇总报告，含一句话决策建议与归因探索分析。'},{ik:'lock',n:'互斥管理',d:'实验层/互斥组配置，防止多实验之间的干扰与流量冲突。'},{ik:'refresh',n:'灰度发布',d:'实验结论确认后一键推全，支持渐进式灰度放量与回滚。'}]},
+  cdp: { id:'cdp', name:'CDP 用户画像平台', category:'应用', iconSvg:PI.cdp, iconBg:'#A08C6E', badgeBg:'#F0EAE0', badgeColor:'#7A5832', color:'#A08C6E',
+    desc:'迅雷统一用户数据平台，整合多端用户行为与属性数据，构建 360° 用户画像，支持精准人群圈选与智能标签体系，赋能精细化运营。',
+    modules:[{ik:'tag',n:'用户标签',d:'沉淀 1000+ 用户属性与行为标签，支持自定义标签规则与定时更新。'},{ik:'user',n:'人群圈选',d:'基于标签组合圈选目标人群，支持实时预估人群规模。'},{ik:'user',n:'用户画像',d:'多维度可视化用户画像，呈现年龄、地域、活跃度、偏好等分布。'},{ik:'chart',n:'行为分析',d:'分析不同人群的行为路径差异，识别高价值用户特征。'},{ik:'download',n:'人群导出',d:'一键导出圈定人群的设备 ID，对接推送、广告投放等下游系统。'},{ik:'refresh',n:'人群同步',d:'定时同步人群至第三方平台（短信/Push/广告），实现自动化触达。'}]},
+  permission: { id:'permission', name:'权限管理中心', category:'权限', iconSvg:PI.permission, iconBg:'#8A8E95', badgeBg:'#EEEEEF', badgeColor:'#555A60', color:'#8A8E95',
+    desc:'统一管理 X-Data 所有平台的成员权限与数据访问控制，支持基于角色的权限分配、自助申请审批流程与权限使用看板，保障数据安全合规。',
+    modules:[{ik:'user',n:'成员管理',d:'统一管理各平台成员账号，支持批量导入与部门组织架构同步。'},{ik:'check',n:'角色权限',d:'预置多级角色模板（管理员/分析师/只读等），支持自定义权限组合。'},{ik:'doc',n:'权限申请',d:'员工自助发起数据权限申请，自动路由至负责人审批。'},{ik:'check',n:'审批流程',d:'可配置多级审批链路，支持超时自动提醒与代理审批。'},{ik:'doc',n:'访问日志',d:'记录所有数据访问行为，支持合规审计与异常访问追溯。'},{ik:'eye',n:'数据脱敏',d:'对敏感字段进行动态脱敏展示，最小化数据暴露风险。'}]}
+};
+
+/* ═══ RENDER PLATFORM CARDS ═══════════════════════════ */
+function renderPortalCards() {
+  const el = document.getElementById('portalView');
+  const themes = ['t-int','t-gov','t-trk','t-ast','t-mtr','t-anl','t-app','t-cdp','t-prm'];
+  const ids = ['integration','governance','tracking','asset','metric','adhoc','abtest','cdp','permission'];
+  el.innerHTML = ids.map((id,i)=>{
+    const p = PLATFORMS[id];
+    return `<div class="${themes[i]}" onclick="navTo('${id}')">
+      <a class="platform-card">
+        <div class="pc-hd"><div class="pc-icon">${p.iconSvg}</div><div><div class="pc-title">${p.name}</div><span class="pc-badge">${p.category}</span></div></div>
+        <div class="pc-desc">${p.desc}</div>
+        <div class="pc-tags">${p.modules.slice(0,5).map(m=>`<span class="pc-tag">${m.n}</span>`).join('')}</div>
+      </a>
+    </div>`;
+  }).join('');
+  // re-bind tag clicks
+  setTimeout(()=>{
+    document.querySelectorAll('.pc-tag').forEach(tag=>{
+      tag.addEventListener('click',e=>{e.stopPropagation();showToast('跳转到：'+tag.textContent.trim());});
+    });
+  },0);
+}
+
+/* ═══ NAVIGATION ═════════════════════════════════════ */
+const NAV_TAB_MAP = {
+  integration:'ntIntegration',governance:'ntGovernance',tracking:'ntGovernance',
+  asset:'ntAsset',metric:'ntAsset',adhoc:'ntAnalysis',
+  abtest:'ntApplication',cdp:'ntApplication',permission:'ntPermission',
+};
+
+function goHome() {
+  document.getElementById('homeView').style.display='block';
+  document.getElementById('detailView').style.display='none';
+  document.getElementById('detailView').innerHTML='';
+  setNavTab('ntHome');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function navTo(platformId) {
+  const p=PLATFORMS[platformId]; if(!p) return;
+  document.getElementById('homeView').style.display='none';
+  const dv=document.getElementById('detailView');
+  dv.style.display='block';
+
+  const modsHTML = p.modules.map(m=>{
+    const svg = (MI[m.ik]||MI.cog).replace(/COLOR/g, p.color);
+    return `<div class="detail-module" onclick="showToast('进入${m.n}')">
+      <div class="dm-icon" style="background:${p.iconBg}">${svg}</div>
+      <div class="detail-module-title">${m.n}</div>
+      <div class="detail-module-desc">${m.d}</div>
+    </div>`;
+  }).join('');
+
+  dv.innerHTML = `
+    <div class="detail-back" onclick="goHome()">← 返回门户</div>
+    <div class="detail-hero">
+      <div class="detail-hero-icon" style="background:${p.iconBg}">${p.iconSvg}</div>
+      <div class="detail-hero-text">
+        <div class="detail-hero-badge" style="background:${p.badgeBg};color:${p.badgeColor}">${p.category}</div>
+        <h1>${p.name}</h1>
+        <p>${p.desc}</p>
+      </div>
+    </div>
+    <div class="detail-grid">${modsHTML}</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:48px">
+      <button class="detail-entry-btn" onclick="showToast('正在跳转到 ${p.name}…')">
+        进入 ${p.name}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <span style="font-size:12.5px;color:var(--text-muted)">点击功能模块可跳转对应子功能</span>
+    </div>
+    <div class="footer"><span>X-Data 数据平台 · ${p.name}</span><span>v2.0 · 2026</span></div>
+  `;
+
+  setNavTab(NAV_TAB_MAP[platformId]||'ntHome');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setNavTab(activeId) {
+  ['ntHome','ntIntegration','ntGovernance','ntAsset','ntAnalysis','ntApplication','ntPermission']
+    .forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',id===activeId);});
+}
+
+function switchHomeView(type) {
+  const portal=document.getElementById('portalView');
+  const landscape=document.getElementById('landscapeView');
+  const vtp=document.getElementById('vtPortal');
+  const vtl=document.getElementById('vtLandscape');
+  if(type==='portal'){portal.style.display='grid';landscape.style.display='none';vtp.classList.add('active');vtl.classList.remove('active');}
+  else{portal.style.display='none';landscape.style.display='block';vtp.classList.remove('active');vtl.classList.add('active');}
+}
+
+let toastTimer;
+function showToast(msg) {
+  const el=document.getElementById('toastEl');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.classList.remove('show'),2000);
+}
+
+renderPortalCards();
+</script>
+</body>
+</html>
