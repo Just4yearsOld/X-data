@@ -154,35 +154,83 @@
   .nav-avatar:hover { transform: scale(1.08); }
 
   /* ═══════════════ MAIN ═══════════════ */
-  .main { margin-top: var(--nav-h); padding: 32px 32px 64px; max-width: 1400px; margin-left: auto; margin-right: auto; }
+  .main { margin-top: var(--nav-h); padding: 36px 40px 80px; max-width: 1440px; margin-left: auto; margin-right: auto; }
 
   /* ─── HERO ─── */
   .hero-band {
     background: linear-gradient(160deg, #007AFF 0%, #5856D6 50%, #AF52DE 100%);
     border-radius: var(--radius-xl);
-    padding: 48px 56px; margin-bottom: 32px;
-    display: flex; align-items: center; justify-content: space-between;
+    padding: 0; margin-bottom: 32px;
+    display: flex; align-items: stretch;
     color: #fff; position: relative; overflow: hidden;
+    min-height: 320px;
   }
   .hero-band::after {
     content: ''; position: absolute; top: -40%; right: -10%;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
+  .hero-left {
+    position: relative; z-index: 1;
+    flex: 0 0 48%; padding: 52px 0 48px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-right {
+    position: relative; z-index: 1;
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 40px 48px 40px 0;
+  }
+  .hero-preview-stack {
+    display: flex; flex-direction: column; gap: 12px;
+    width: 100%; max-width: 420px;
+    perspective: 800px;
+  }
+  .hero-preview-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 14px; padding: 18px 22px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; gap: 14px;
+    transform: rotateY(-6deg) translateZ(0);
+    transition: transform 0.3s cubic-bezier(0.16,0.86,0.44,1);
+  }
+  .hero-preview-card:nth-child(2) { transform: rotateY(-3deg) translateZ(0) translateX(8px); }
+  .hero-preview-card:nth-child(3) { transform: rotateY(0deg) translateZ(0) translateX(16px); }
+  .hero-preview-dot {
+    width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0;
+  }
+  .hero-preview-info { flex: 1; }
+  .hero-preview-name {
+    font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px;
+  }
+  .hero-preview-desc {
+    font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.4;
+  }
+  .hero-preview-stat {
+    font-size: 18px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
   .hero-text { position: relative; z-index: 1; }
-  .hero-text h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero-text h1 { font-size: 34px; font-weight: 700; color: #fff; margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.2; }
   .hero-text h1 span { color: rgba(255,255,255,0.7); font-weight: 600; }
-  .hero-text p { font-size: 15px; color: rgba(255,255,255,0.72); max-width: 520px; line-height: 1.65; }
-  .hero-stats { display: flex; gap: 48px; position: relative; z-index: 1; }
-  .hero-stat { text-align: center; }
-  .hero-stat-val { font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 6px; color: #fff; letter-spacing: -0.5px; }
-  .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500; }
+  .hero-text p { font-size: 15px; color: rgba(255,255,255,0.72); max-width: 460px; line-height: 1.7; margin-bottom: 24px; }
+  .hero-feature-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hero-feature-tag {
+    padding: 7px 16px; background: rgba(255,255,255,0.15);
+    border-radius: 20px; font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.9);
+    border: 0.5px solid rgba(255,255,255,0.15);
+  }
+  .hero-stats { display: flex; gap: 40px; position: relative; z-index: 1; margin-top: 28px; }
+  .hero-stat { text-align: left; }
+  .hero-stat-val { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 4px; color: #fff; letter-spacing: -0.5px; }
+  .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 500; }
 
   /* ─── VIEW TOGGLE ─── */
   .view-tabs {
     display: inline-flex; align-items: center; gap: 2px;
-    margin-bottom: 24px; background: var(--fill-quaternary);
+    margin-bottom: 28px; background: var(--fill-quaternary);
     border-radius: 10px; padding: 3px;
   }
   .view-tab {
@@ -199,7 +247,7 @@
   }
 
   /* ═══════════════ PORTAL GRID ═══════════════ */
-  #portalView { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  #portalView { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
   .platform-card {
     background: var(--bg-card); border-radius: var(--radius-lg);
@@ -389,23 +437,34 @@
     #portalView { grid-template-columns: repeat(3, 1fr); }
     .landscape-grid { grid-template-columns: repeat(2, 1fr); }
     .detail-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-band { padding: 36px 40px; }
+    .hero-left { padding: 40px 0 36px 40px; }
+    .hero-right { padding: 40px 32px 40px 0; }
+    .hero-text h1 { font-size: 28px; }
   }
   @media (max-width: 900px) {
     #portalView { grid-template-columns: repeat(2, 1fr); }
     .nav-tabs { display: none; }
-    .hero-band { flex-direction: column; text-align: center; gap: 24px; padding: 32px 28px; }
+    .hero-band { flex-direction: column; min-height: auto; }
+    .hero-left { padding: 32px 28px 24px; flex: auto; }
+    .hero-right { padding: 0 28px 32px; justify-content: flex-start; }
+    .hero-preview-card { transform: none !important; }
+    .hero-preview-card:nth-child(2) { transform: none !important; }
+    .hero-preview-card:nth-child(3) { transform: none !important; }
     .hero-stats { gap: 32px; }
     .hero-text h1 { font-size: 26px; }
   }
   @media (max-width: 640px) {
-    .main { padding: 20px 16px; }
+    .main { padding: 20px 16px 40px; }
     #portalView { grid-template-columns: 1fr; }
     .landscape-grid { grid-template-columns: 1fr; }
     .detail-grid { grid-template-columns: 1fr; }
-    .hero-band { padding: 28px 20px; }
     .hero-stat-val { font-size: 24px; }
     .detail-hero { padding: 28px 24px; flex-direction: column; text-align: center; }
+    .hero-left { padding: 28px 20px 16px; }
+    .hero-right { padding: 0 20px 28px; justify-content: flex-start; }
+    .hero-text h1 { font-size: 24px; }
+    .hero-preview-card { transform: none !important; }
+    .hero-preview-card:nth-child(2), .hero-preview-card:nth-child(3) { transform: none !important; }
   }
 </style>
 </head>
@@ -435,7 +494,7 @@
         <div class="mega-col"><div class="mega-col-title">集成</div><a class="mega-item" onclick="navTo('integration')"><span class="mega-dot" style="background:#34C759"></span>XDAP 平台</a></div>
         <div class="mega-col"><div class="mega-col-title">埋点</div><a class="mega-item" onclick="navTo('tracking')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a></div>
         <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('governance')"><span class="mega-dot" style="background:#FF9500"></span>DQC 质量</a><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a></div>
-        <div class="mega-col"><div class="mega-col-title">分析</div><a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a></div>
+        <div class="mega-col"><div class="mega-col-title">分析</div><a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a><a class="mega-item" onclick="navTo('tracking','ntAnalysis')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a></div>
         <div class="mega-col"><div class="mega-col-title">应用</div><a class="mega-item" onclick="navTo('abtest')"><span class="mega-dot" style="background:#FF3B30"></span>A/B 实验</a><a class="mega-item" onclick="navTo('cdp')"><span class="mega-dot" style="background:#FF2D55"></span>CDP 画像</a></div>
         <div class="mega-col"><div class="mega-col-title">AI</div><a class="mega-item" onclick="navTo('ai')"><span class="mega-dot" style="background:#5856D6"></span>智能助手</a></div>
         <div class="mega-col"><div class="mega-col-title">权限</div><a class="mega-item" onclick="navTo('permission')"><span class="mega-dot" style="background:#8E8E93"></span>权限管理中心</a></div>
@@ -450,7 +509,12 @@
         <div class="mega-col"><div class="mega-col-title">资产</div><a class="mega-item" onclick="navTo('asset')"><span class="mega-dot" style="background:#007AFF"></span>数据资产平台</a><a class="mega-item" onclick="navTo('metric')"><span class="mega-dot" style="background:#5AC8FA"></span>指标平台</a></div>
       </div>
     </div>
-    <div class="nav-tab" id="ntAnalysis"    onclick="navTo('adhoc')">分析</div>
+    <div class="nav-tab" id="ntAnalysis">
+      分析<span class="nav-tab-arrow">›</span>
+      <div class="mega-menu">
+        <div class="mega-col"><div class="mega-col-title">分析</div><a class="mega-item" onclick="navTo('adhoc')"><span class="mega-dot" style="background:#00C7BE"></span>AdHoc 查询</a><a class="mega-item" onclick="navTo('tracking','ntAnalysis')"><span class="mega-dot" style="background:#AF52DE"></span>迅数平台</a></div>
+      </div>
+    </div>
     <div class="nav-tab" id="ntApplication">
       应用<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
@@ -476,14 +540,42 @@
 <main class="main">
   <div id="homeView">
     <div class="hero-band">
-      <div class="hero-text">
-        <h1><span>X-Data</span> · 一站式数据平台</h1>
-        <p>整合数据集成、埋点、资产与质量、分析与应用，AI 智能驱动数据全链路，让每一个数据决策都有迹可循。</p>
+      <div class="hero-left">
+        <div class="hero-text">
+          <h1><span>X-Data</span> · 一站式数据平台</h1>
+          <p>整合数据集成、埋点、资产与质量、分析与应用，AI 智能驱动数据全链路，让每一个数据决策都有迹可循。</p>
+          <div class="hero-feature-list">
+            <span class="hero-feature-tag">数据集成</span>
+            <span class="hero-feature-tag">质量治理</span>
+            <span class="hero-feature-tag">用户画像</span>
+            <span class="hero-feature-tag">A/B 实验</span>
+            <span class="hero-feature-tag">AI 分析</span>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="hero-stat-val">10+</div><div class="hero-stat-label">核心平台</div></div>
+            <div class="hero-stat"><div class="hero-stat-val">200+</div><div class="hero-stat-label">数据指标</div></div>
+            <div class="hero-stat"><div class="hero-stat-val">AI 驱动</div><div class="hero-stat-label">智能分析</div></div>
+          </div>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-val">10+</div><div class="hero-stat-label">核心平台</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">200+</div><div class="hero-stat-label">数据指标</div></div>
-        <div class="hero-stat"><div class="hero-stat-val">AI 驱动</div><div class="hero-stat-label">智能分析</div></div>
+      <div class="hero-right">
+        <div class="hero-preview-stack">
+          <div class="hero-preview-card">
+            <div class="hero-preview-dot" style="background:#34C759"></div>
+            <div class="hero-preview-info"><div class="hero-preview-name">XDAP 数据集成</div><div class="hero-preview-desc">100+ 数据源接入 · 实时同步</div></div>
+            <div class="hero-preview-stat">99.9%</div>
+          </div>
+          <div class="hero-preview-card">
+            <div class="hero-preview-dot" style="background:#FF9500"></div>
+            <div class="hero-preview-info"><div class="hero-preview-name">DQC 数据质量</div><div class="hero-preview-desc">自动化检测 · 质量闭环</div></div>
+            <div class="hero-preview-stat">98.5</div>
+          </div>
+          <div class="hero-preview-card">
+            <div class="hero-preview-dot" style="background:#FF3B30"></div>
+            <div class="hero-preview-info"><div class="hero-preview-name">A/B 实验平台</div><div class="hero-preview-desc">统计检验 · 报告自动生成</div></div>
+            <div class="hero-preview-stat">P≤0.05</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -535,8 +627,9 @@
           <div class="landscape-col-body">
             <div class="ls-sub">分析</div>
             <div class="ls-item" onclick="navTo('adhoc')"><span class="ls-dot" style="background:#00C7BE"></span>AdHoc 即席查询</div>
-            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#AF52DE"></span>漏斗分析</div>
-            <div class="ls-item" onclick="navTo('tracking')"><span class="ls-dot" style="background:#AF52DE"></span>留存分析</div>
+            <div class="ls-item" onclick="navTo('tracking','ntAnalysis')"><span class="ls-dot" style="background:#AF52DE"></span>迅数平台</div>
+            <div class="ls-item" onclick="navTo('tracking','ntAnalysis')"><span class="ls-dot" style="background:#AF52DE"></span>漏斗分析</div>
+            <div class="ls-item" onclick="navTo('tracking','ntAnalysis')"><span class="ls-dot" style="background:#AF52DE"></span>留存分析</div>
             <div class="ls-sub">应用</div>
             <div class="ls-item" onclick="navTo('abtest')"><span class="ls-dot" style="background:#FF3B30"></span>A/B 实验平台</div>
             <div class="ls-item" onclick="navTo('cdp')"><span class="ls-dot" style="background:#FF2D55"></span>CDP 用户画像</div>
@@ -676,7 +769,7 @@ function goHome() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function navTo(platformId) {
+function navTo(platformId, tabId) {
   const p = PLATFORMS[platformId]; if (!p) return;
   document.getElementById('homeView').style.display = 'none';
   const dv = document.getElementById('detailView');
@@ -712,7 +805,7 @@ function navTo(platformId) {
     <div class="footer"><span>X-Data 数据平台 · ${p.name}</span><span>v2.0 · 2026</span></div>
   `;
 
-  setNavTab(NAV_TAB_MAP[platformId] || 'ntHome');
+  setNavTab(tabId || NAV_TAB_MAP[platformId] || 'ntHome');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
