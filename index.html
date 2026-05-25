@@ -295,40 +295,84 @@
 
   .perm-section-title { font-size: 15px; font-weight: 600; color: #1D2129; margin-bottom: 16px; }
 
-  .perm-system-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 32px; }
-  .perm-system-item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #F7F8FA; border-radius: 6px; border: 1px solid #E5E6EB; font-size: 12px; color: #4E5969; }
-  .perm-system-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  /* ── 角色管理: 左-右面板布局 ── */
+  .perm-role-layout { display: flex; gap: 0; border: 1px solid #E5E6EB; border-radius: 8px; overflow: hidden; min-height: 520px; }
+  .perm-role-sidebar { width: 220px; flex-shrink: 0; background: #F7F8FA; border-right: 1px solid #E5E6EB; padding: 12px 0; overflow-y: auto; }
+  .perm-role-sidebar-hd { padding: 0 14px 10px; font-size: 12px; font-weight: 600; color: #86909C; text-transform: uppercase; letter-spacing: 0.5px; }
+  .perm-role-side-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; transition: background 0.15s; font-size: 13px; color: #4E5969; }
+  .perm-role-side-item:hover { background: #E8F3FF; }
+  .perm-role-side-item.active { background: #E8F3FF; color: #165DFF; font-weight: 500; }
+  .perm-role-side-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .perm-role-side-info { flex: 1; min-width: 0; }
+  .perm-role-side-name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .perm-role-side-count { font-size: 11px; color: #86909C; }
+  .perm-role-side-badge { font-size: 10px; padding: 1px 5px; border-radius: 2px; flex-shrink: 0; }
 
-  .perm-tree { margin-bottom: 32px; }
-  .perm-tree-node { margin-bottom: 4px; }
-  .perm-tree-parent { display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; color: #1D2129; font-weight: 500; }
-  .perm-tree-parent:hover { background: #F2F3F5; }
-  .perm-tree-arrow { font-size: 10px; color: #86909C; transition: transform 0.2s; width: 14px; text-align: center; }
-  .perm-tree-parent.open .perm-tree-arrow { transform: rotate(90deg); }
-  .perm-tree-children { margin-left: 22px; display: none; }
-  .perm-tree-parent.open + .perm-tree-children { display: block; }
-  .perm-tree-child { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; color: #4E5969; }
-  .perm-tree-child:hover { background: #F2F3F5; }
-  .perm-tree-child-dot { width: 6px; height: 6px; border-radius: 50%; background: #C9CDD4; flex-shrink: 0; }
-  .perm-tree-leaf { padding-left: 16px; }
-  .perm-tree-tag { font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-left: auto; }
-  .perm-tree-tag.read { background: #E8FFEA; color: #00B42A; }
-  .perm-tree-tag.write { background: #FFECE8; color: #F53F3F; }
+  .perm-role-main { flex: 1; padding: 20px 24px; overflow-y: auto; }
+  .perm-role-main-empty { display: flex; align-items: center; justify-content: center; height: 100%; color: #C9CDD4; font-size: 14px; }
+  .perm-role-main-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .perm-role-main-name { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 600; color: #1D2129; }
+  .perm-role-main-desc { font-size: 13px; color: #86909C; margin-bottom: 24px; line-height: 1.7; }
+  .perm-role-main-subtitle { font-size: 13px; font-weight: 600; color: #1D2129; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #F2F3F5; }
 
-  .perm-role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
-  .perm-role-card { padding: 16px; background: #fff; border: 1px solid #E5E6EB; border-radius: 8px; }
-  .perm-role-card-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .perm-role-card-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .perm-role-card-name { font-size: 14px; font-weight: 500; color: #1D2129; }
-  .perm-role-card-desc { font-size: 12px; color: #86909C; line-height: 1.6; margin-bottom: 10px; }
-  .perm-role-card-count { font-size: 11px; color: #86909C; }
-  .perm-role-card-count strong { color: #1D2129; font-weight: 600; }
+  /* ── 权限分配矩阵 ── */
+  .perm-matrix { border: 1px solid #E5E6EB; border-radius: 6px; overflow: hidden; margin-bottom: 28px; }
+  .perm-matrix-row { display: flex; align-items: center; padding: 10px 14px; border-bottom: 1px solid #F2F3F5; font-size: 13px; }
+  .perm-matrix-row:last-child { border-bottom: none; }
+  .perm-matrix-row.header { background: #F7F8FA; font-weight: 500; color: #4E5969; font-size: 12px; }
+  .perm-matrix-label { flex: 1; color: #1D2129; display: flex; align-items: center; gap: 6px; }
+  .perm-matrix-radio { display: flex; gap: 24px; margin-left: auto; }
+  .perm-matrix-opt { display: flex; align-items: center; gap: 5px; cursor: pointer; color: #86909C; font-size: 12px; }
+  .perm-matrix-opt.selected { color: #165DFF; font-weight: 500; }
+  .perm-matrix-opt.selected .perm-mx-dot { background: #165DFF; box-shadow: 0 0 0 2px rgba(22,93,255,0.2); }
+  .perm-mx-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #C9CDD4; flex-shrink: 0; transition: all 0.15s; }
+  .perm-mx-dot.deny { background: #F2F3F5; border-color: #E5E6EB; }
+  .perm-mx-dot.read { border-color: #165DFF; }
+  .perm-mx-dot.admin { border-color: #165DFF; background: #165DFF; }
+  .perm-matrix-opt.deny.selected .perm-mx-dot { border-color: #86909C; background: #86909C; box-shadow: 0 0 0 2px rgba(134,144,156,0.2); }
+  .perm-matrix-opt.read.selected .perm-mx-dot { background: #fff; border-color: #165DFF; box-shadow: 0 0 0 2px rgba(22,93,255,0.25); }
+  .perm-matrix-opt.admin.selected .perm-mx-dot { background: #165DFF; border-color: #165DFF; }
 
-  .perm-user-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; font-size: 13px; }
-  .perm-user-table th { text-align: left; padding: 10px 14px; color: #86909C; font-weight: 500; font-size: 12px; border-bottom: 1px solid #E5E6EB; }
-  .perm-user-table td { padding: 12px 14px; color: #1D2129; border-bottom: 1px solid #F2F3F5; }
+  /* ── 功能权限树 tab ── */
+  .perm-tree-wrap { border: 1px solid #E5E6EB; border-radius: 8px; overflow: hidden; }
+  .perm-tree-node { border-bottom: 1px solid #F2F3F5; }
+  .perm-tree-node:last-child { border-bottom: none; }
+  .perm-tree-row { display: flex; align-items: center; padding: 9px 14px; cursor: pointer; font-size: 13px; color: #1D2129; transition: background 0.12s; }
+  .perm-tree-row:hover { background: #E8F3FF; }
+  .perm-tree-row.lv0 { background: #F7F8FA; font-weight: 600; font-size: 13.5px; }
+  .perm-tree-row.lv1 { padding-left: 32px; }
+  .perm-tree-row.lv2 { padding-left: 50px; }
+  .perm-tree-row.lv3 { padding-left: 68px; }
+  .perm-tree-arrow { font-size: 10px; color: #86909C; width: 16px; text-align: center; flex-shrink: 0; transition: transform 0.2s; }
+  .perm-tree-row.open .perm-tree-arrow { transform: rotate(90deg); }
+  .perm-tree-label { flex: 1; display: flex; align-items: center; gap: 6px; }
+  .perm-tree-dot { width: 6px; height: 6px; border-radius: 50%; background: #C9CDD4; flex-shrink: 0; }
+  .perm-tree-lv0-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .perm-tree-roles { display: flex; gap: 4px; margin-left: auto; }
+  .perm-tree-role-tag { font-size: 10px; padding: 2px 7px; border-radius: 2px; font-weight: 400; }
+  .perm-tree-role-tag.full { background: #E8FFEA; color: #00B42A; }
+  .perm-tree-role-tag.readonly { background: #E8F3FF; color: #165DFF; }
+  .perm-tree-role-tag.none { background: #F2F3F5; color: #C9CDD4; }
+
+  /* ── 用户管理 tab ── */
+  .perm-user-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .perm-search { display: flex; align-items: center; gap: 8px; padding: 7px 12px; background: #F7F8FA; border: 1px solid #E5E6EB; border-radius: 6px; width: 280px; font-size: 13px; color: #1D2129; }
+  .perm-search input { border: none; background: transparent; outline: none; flex: 1; font-size: 13px; color: #1D2129; }
+  .perm-search input::placeholder { color: #C9CDD4; }
+  .perm-filter { display: flex; align-items: center; gap: 6px; padding: 7px 12px; background: #fff; border: 1px solid #E5E6EB; border-radius: 6px; font-size: 13px; color: #4E5969; cursor: pointer; }
+  .perm-filter:hover { border-color: #165DFF; }
+  .perm-user-table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid #E5E6EB; border-radius: 8px; overflow: hidden; }
+  .perm-user-table th { text-align: left; padding: 10px 14px; color: #86909C; font-weight: 500; font-size: 12px; background: #F7F8FA; border-bottom: 1px solid #E5E6EB; }
+  .perm-user-table td { padding: 11px 14px; color: #1D2129; border-bottom: 1px solid #F2F3F5; }
+  .perm-user-table tr:last-child td { border-bottom: none; }
   .perm-user-table tr:hover td { background: #F7F8FA; }
   .perm-user-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 2px; }
+  .perm-user-status { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; }
+  .perm-user-status.active { background: #00B42A; }
+  .perm-user-status.inactive { background: #C9CDD4; }
+  .perm-user-actions { display: flex; gap: 8px; }
+  .perm-user-actions span { color: #165DFF; cursor: pointer; font-size: 12px; }
+  .perm-user-actions span:hover { text-decoration: underline; }
 
   /* ═══════════════ PORTAL GRID ═══════════════ */
   #portalView { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -890,35 +934,69 @@ const PLATFORMS = {
         { name:'AI 助手', icon:'#7B61FF' }
       ],
       permTree: [
-        { name:'系统管理', children:[
-          { name:'平台配置' }, { name:'服务启停' }, { name:'版本管理' }
+        { id:'sys', name:'系统管理', children:[
+          { id:'sys_config', name:'平台配置' },
+          { id:'sys_service', name:'服务启停' },
+          { id:'sys_version', name:'版本管理' },
+          { id:'sys_monitor', name:'监控面板' }
         ]},
-        { name:'数据访问', children:[
-          { name:'数据库', children:[{name:'生产库'},{name:'测试库'},{name:'归档库'}] },
-          { name:'数据表' },
-          { name:'数据列' }
+        { id:'data', name:'数据访问', children:[
+          { id:'data_db', name:'数据库', children:[
+            { id:'data_db_prod', name:'生产库' },
+            { id:'data_db_test', name:'测试库' },
+            { id:'data_db_archive', name:'归档库' }
+          ]},
+          { id:'data_table', name:'数据表' },
+          { id:'data_column', name:'数据列' },
+          { id:'data_export', name:'数据导出' }
         ]},
-        { name:'功能权限', children:[
-          { name:'任务管理' }, { name:'报告管理' }, { name:'导出下载' }
+        { id:'func', name:'功能权限', children:[
+          { id:'func_task', name:'任务管理', children:[
+            { id:'func_task_create', name:'创建任务' },
+            { id:'func_task_edit', name:'编辑任务' },
+            { id:'func_task_run', name:'运行/停止' },
+            { id:'func_task_delete', name:'删除任务' }
+          ]},
+          { id:'func_report', name:'报告管理', children:[
+            { id:'func_report_create', name:'创建报告' },
+            { id:'func_report_edit', name:'编辑报告' },
+            { id:'func_report_publish', name:'发布报告' }
+          ]},
+          { id:'func_export', name:'导出下载' },
+          { id:'func_query', name:'即席查询' }
         ]},
-        { name:'管理权限', children:[
-          { name:'成员管理' }, { name:'角色管理' }, { name:'审批管理' }, { name:'审计日志' }
+        { id:'admin', name:'管理权限', children:[
+          { id:'admin_member', name:'成员管理' },
+          { id:'admin_role', name:'角色管理' },
+          { id:'admin_approval', name:'审批管理' },
+          { id:'admin_audit', name:'审计日志' }
         ]}
       ],
       roles: [
-        { name:'系统管理员', desc:'全局最高权限，拥有所有平台与功能的完全控制权。', color:'#F53F3F', members:2 },
-        { name:'平台负责人', desc:'负责特定平台的配置管理与服务维护。', color:'#FF7D00', members:8 },
-        { name:'数据分析师', desc:'拥有数据查询与分析权限，可访问授权范围内的数据表。', color:'#165DFF', members:35 },
-        { name:'业务人员', desc:'只读浏览权限，可查看授权数据与报表，不可执行查询。', color:'#14C9C9', members:120 },
-        { name:'开发者', desc:'拥有开发环境使用权，可发布任务与配置 ETL 流程。', color:'#722ED1', members:18 },
-        { name:'访客', desc:'最低权限，仅可查看公开数据资产目录与指标市场。', color:'#86909C', members:50 }
+        { id:'r_admin', name:'系统管理员', desc:'全局最高权限，拥有所有平台与功能的完全控制权。', color:'#F53F3F', members:2, level:'admin',
+          perms:{ sys:2, data:2, func:2, admin:2 } },
+        { id:'r_owner', name:'平台负责人', desc:'负责特定平台的配置管理与服务维护，可审批该平台权限申请。', color:'#FF7D00', members:8, level:'admin',
+          perms:{ sys:1, data:1, func:1, admin:1 } },
+        { id:'r_analyst', name:'数据分析师', desc:'拥有数据查询与分析权限，可在授权数据范围内进行即席查询与报告生成。', color:'#165DFF', members:35, level:'user',
+          perms:{ sys:0, data:1, func:1, admin:0 } },
+        { id:'r_developer', name:'开发者', desc:'拥有开发环境使用权限，可创建/编辑数据任务与 ETL 流程。', color:'#722ED1', members:18, level:'user',
+          perms:{ sys:0, data:1, func:1, admin:0 } },
+        { id:'r_business', name:'业务人员', desc:'只读浏览权限，可查看授权数据与报表，不可执行数据查询或导出。', color:'#14C9C9', members:120, level:'user',
+          perms:{ sys:0, data:0, func:0, admin:0 } },
+        { id:'r_guest', name:'访客', desc:'最低权限，仅可查看公开数据资产目录与指标市场。', color:'#86909C', members:50, level:'user',
+          perms:{ sys:0, data:0, func:0, admin:0 } }
       ],
       users: [
-        { name:'张明', dept:'数据平台部', role:'系统管理员', systems:'全部平台' },
-        { name:'李芳', dept:'数据平台部', role:'平台负责人', systems:'XDAP, DQC' },
-        { name:'王磊', dept:'增长分析组', role:'数据分析师', systems:'迅数, AdHoc' },
-        { name:'陈静', dept:'产品运营部', role:'业务人员', systems:'A/B 实验, CDP' },
-        { name:'赵强', dept:'数据开发组', role:'开发者', systems:'XDAP, 指标平台' }
+        { name:'张明', dept:'数据平台部', role:'系统管理员', roleId:'r_admin', systems:'全部平台', status:'active' },
+        { name:'李芳', dept:'数据平台部', role:'平台负责人', roleId:'r_owner', systems:'XDAP, DQC', status:'active' },
+        { name:'王磊', dept:'增长分析组', role:'数据分析师', roleId:'r_analyst', systems:'迅数, AdHoc', status:'active' },
+        { name:'陈静', dept:'产品运营部', role:'业务人员', roleId:'r_business', systems:'A/B 实验, CDP', status:'active' },
+        { name:'赵强', dept:'数据开发组', role:'开发者', roleId:'r_developer', systems:'XDAP, 指标平台', status:'active' },
+        { name:'刘洋', dept:'数据平台部', role:'数据分析师', roleId:'r_analyst', systems:'数据资产, AdHoc', status:'active' },
+        { name:'周敏', dept:'增长分析组', role:'平台负责人', roleId:'r_owner', systems:'迅数平台', status:'active' },
+        { name:'吴昊', dept:'数据开发组', role:'开发者', roleId:'r_developer', systems:'DQC, XDAP', status:'inactive' },
+        { name:'孙悦', dept:'产品运营部', role:'业务人员', roleId:'r_business', systems:'CDP 画像', status:'active' },
+        { name:'马丁', dept:'数据平台部', role:'访客', roleId:'r_guest', systems:'指标平台', status:'active' }
       ]
     }
   },
@@ -1010,40 +1088,120 @@ function navTo(platformId, tabId) {
 
 function renderPermissionDetail(p) {
   const pd = p.permissionDetail;
-  const sysHTML = pd.systems.map(s => `<div class="perm-system-item"><span class="perm-system-dot" style="background:${s.icon}"></span>${s.name}</div>`).join('');
 
-  function renderTreeNode(node, depth) {
-    if (node.children) {
-      return `<div class="perm-tree-node">
-        <div class="perm-tree-parent" onclick="this.classList.toggle('open')">
-          <span class="perm-tree-arrow">▶</span>${node.name}
-        </div>
-        <div class="perm-tree-children">${node.children.map(c => renderTreeNode(c, depth+1)).join('')}</div>
-      </div>`;
-    } else {
-      const leafClass = depth > 2 ? ' perm-tree-leaf' : '';
-      return `<div class="perm-tree-child${leafClass}"><span class="perm-tree-child-dot"></span>${node.name}<span class="perm-tree-tag read">读</span><span class="perm-tree-tag write">写</span></div>`;
-    }
-  }
-  const treeHTML = pd.permTree.map(n => renderTreeNode(n, 1)).join('');
-
-  const roleHTML = pd.roles.map(r => `
-    <div class="perm-role-card">
-      <div class="perm-role-card-hd">
-        <span class="perm-role-card-dot" style="background:${r.color}"></span>
-        <span class="perm-role-card-name">${r.name}</span>
+  // ── Tab 1: 角色管理（左角色列表 + 右权限矩阵 & 成员） ──
+  const roleSidebarHTML = pd.roles.map((r,i) => `
+    <div class="perm-role-side-item${i===0?' active':''}" data-role-id="${r.id}" onclick="selectPermRole('${r.id}')">
+      <span class="perm-role-side-dot" style="background:${r.color}"></span>
+      <div class="perm-role-side-info">
+        <div class="perm-role-side-name">${r.name}</div>
+        <div class="perm-role-side-count">${r.members} 名成员</div>
       </div>
-      <div class="perm-role-card-desc">${r.desc}</div>
-      <div class="perm-role-card-count">成员数 <strong>${r.members}</strong></div>
+      <span class="perm-role-side-badge" style="background:${r.color}15;color:${r.color}">${r.level==='admin'?'管理':'用户'}</span>
     </div>
   `).join('');
 
-  const userHTML = pd.users.map(u => {
-    const rb = p.modules.find(m => m.n === '角色权限');
-    return `<tr>
-      <td>${u.name}</td><td>${u.dept}</td>
-      <td><span class="perm-user-badge" style="background:#F2F3F5;color:#4E5969">${u.role}</span></td>
+  const roleDetailHTML = pd.roles.map((r,i) => {
+    const membersHTML = pd.users.filter(u => u.roleId === r.id).map(u => `
+      <tr>
+        <td>${u.name}</td><td>${u.dept}</td><td>${u.systems}</td>
+      </tr>
+    `).join('');
+    return `
+    <div class="perm-role-detail-panel" id="roleDetail_${r.id}" style="${i===0?'':'display:none'}">
+      <div class="perm-role-main-hd">
+        <div class="perm-role-main-name">
+          <span class="perm-role-side-dot" style="background:${r.color};width:12px;height:12px"></span>${r.name}
+        </div>
+        <span style="font-size:12px;color:#86909C">${r.members} 名成员</span>
+      </div>
+      <div class="perm-role-main-desc">${r.desc}</div>
+      <div class="perm-role-main-subtitle">权限分配</div>
+      <div class="perm-matrix">
+        <div class="perm-matrix-row header">
+          <span class="perm-matrix-label">权限模块</span>
+          <div class="perm-matrix-radio">
+            <span style="width:36px;text-align:center">无</span>
+            <span style="width:36px;text-align:center">只读</span>
+            <span style="width:36px;text-align:center">管理</span>
+          </div>
+        </div>
+        ${['系统管理','数据访问','功能权限','管理权限'].map((mod,mi) => {
+          const keys = ['sys','data','func','admin'];
+          const val = r.perms[keys[mi]];
+          return `<div class="perm-matrix-row">
+            <span class="perm-matrix-label">${mod}</span>
+            <div class="perm-matrix-radio">
+              <div class="perm-matrix-opt deny ${val===0?'selected':''}" onclick="showToast('权限已设为「无」')"><span class="perm-mx-dot deny"></span></div>
+              <div class="perm-matrix-opt read ${val===1?'selected':''}" onclick="showToast('权限已设为「只读」')"><span class="perm-mx-dot read"></span></div>
+              <div class="perm-matrix-opt admin ${val===2?'selected':''}" onclick="showToast('权限已设为「管理」')"><span class="perm-mx-dot admin"></span></div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div class="perm-role-main-subtitle">角色成员</div>
+      <table class="perm-user-table">
+        <thead><tr><th>姓名</th><th>部门</th><th>授权系统</th></tr></thead>
+        <tbody>${membersHTML}</tbody>
+      </table>
+    </div>`;
+  }).join('');
+
+  const rolesPanelHTML = `
+    <div class="perm-role-layout">
+      <div class="perm-role-sidebar">
+        <div class="perm-role-sidebar-hd">角色列表</div>
+        ${roleSidebarHTML}
+      </div>
+      <div class="perm-role-main">
+        ${roleDetailHTML}
+      </div>
+    </div>`;
+
+  // ── Tab 2: 功能权限树（全树 + 角色标签） ──
+  function renderPermTreeNode(node, depth) {
+    const hasChildren = node.children && node.children.length > 0;
+    const levelClass = 'lv' + Math.min(depth, 3);
+    const roleMap = getRolePermLevel(node.id);
+    let roleTagsHTML = '';
+    if (node.id) {
+      const parts = [];
+      pd.roles.forEach(r => {
+        const lv = roleMap[r.id];
+        if (lv === 2) parts.push(`<span class="perm-tree-role-tag full">${r.name} 管理</span>`);
+        else if (lv === 1) parts.push(`<span class="perm-tree-role-tag readonly">${r.name} 只读</span>`);
+      });
+      roleTagsHTML = parts.join('');
+    }
+    return `<div class="perm-tree-node">
+      <div class="perm-tree-row ${levelClass}"${hasChildren?' onclick="this.classList.toggle(\'open\')"':''}>
+        ${hasChildren?'<span class="perm-tree-arrow">▶</span>':'<span style="width:16px"></span>'}
+        <span class="perm-tree-label">
+          ${depth===0?`<span class="perm-tree-lv0-dot" style="background:#C9CDD4"></span>`:'<span class="perm-tree-dot"></span>'}
+          ${node.name}
+        </span>
+        <span class="perm-tree-roles">${roleTagsHTML}</span>
+      </div>
+      ${hasChildren ? `<div style="display:none">${node.children.map(c => renderPermTreeNode(c, depth+1)).join('')}</div>` : ''}
+    </div>`;
+  }
+  const permTreeHTML = pd.permTree.map(n => renderPermTreeNode(n, 0)).join('');
+
+  // ── Tab 3: 用户管理（搜索 + 表格） ──
+  const userTableHTML = pd.users.map(u => {
+    const roleObj = pd.roles.find(r => r.id === u.roleId);
+    return `<tr data-search="${u.name} ${u.dept} ${u.role} ${u.systems}">
+      <td><span class="perm-user-status ${u.status}"></span>${u.name}</td>
+      <td>${u.dept}</td>
+      <td><span class="perm-user-badge" style="background:${roleObj?roleObj.color:'#86909C'}15;color:${roleObj?roleObj.color:'#4E5969'}">${u.role}</span></td>
       <td>${u.systems}</td>
+      <td><span class="perm-user-badge" style="background:${u.status==='active'?'#E8FFEA':'#F2F3F5'};color:${u.status==='active'?'#00B42A':'#86909C'}">${u.status==='active'?'启用':'停用'}</span></td>
+      <td>
+        <div class="perm-user-actions">
+          <span onclick="showToast('编辑用户: ${u.name}')">编辑</span>
+          <span onclick="showToast('查看权限: ${u.name}')">权限</span>
+        </div>
+      </td>
     </tr>`;
   }).join('');
 
@@ -1057,33 +1215,55 @@ function renderPermissionDetail(p) {
         <p>${p.desc}</p>
       </div>
     </div>
-    <div class="perm-tabs">
-      <div class="perm-tab active" data-tab="systems">系统管理</div>
-      <div class="perm-tab" data-tab="perms">权限目录</div>
-      <div class="perm-tab" data-tab="roles">角色管理</div>
-      <div class="perm-tab" data-tab="users">用户管理</div>
-    </div>
-    <div class="perm-panel" id="permSystems">
-      <div class="perm-section-title">已接入系统（${pd.systems.length}）</div>
-      <div class="perm-system-grid">${sysHTML}</div>
-    </div>
-    <div class="perm-panel" id="permPerms" style="display:none">
-      <div class="perm-section-title">权限目录树</div>
-      <div class="perm-tree">${treeHTML}</div>
-    </div>
-    <div class="perm-panel" id="permRoles" style="display:none">
-      <div class="perm-section-title">角色定义（${pd.roles.length}）</div>
-      <div class="perm-role-grid">${roleHTML}</div>
-    </div>
-    <div class="perm-panel" id="permUsers" style="display:none">
-      <div class="perm-section-title">用户列表</div>
-      <table class="perm-user-table">
-        <thead><tr><th>姓名</th><th>部门</th><th>角色</th><th>授权系统</th></tr></thead>
-        <tbody>${userHTML}</tbody>
-      </table>
+    <div class="perm-wrap">
+      <div class="perm-tabs">
+        <div class="perm-tab active" data-tab="roles">角色管理</div>
+        <div class="perm-tab" data-tab="perms">功能权限</div>
+        <div class="perm-tab" data-tab="users">用户管理</div>
+      </div>
+      <div class="perm-panel" id="permRoles">${rolesPanelHTML}</div>
+      <div class="perm-panel" id="permPerms" style="display:none">
+        <div class="perm-section-title">功能权限树</div>
+        <div class="perm-tree-wrap">${permTreeHTML}</div>
+      </div>
+      <div class="perm-panel" id="permUsers" style="display:none">
+        <div class="perm-user-toolbar">
+          <div class="perm-search">🔍 <input type="text" placeholder="搜索姓名/部门/角色/系统..." oninput="filterPermUsers(this.value)"></div>
+          <div class="perm-filter" onclick="showToast('按角色筛选')">角色 ▼</div>
+          <div class="perm-filter" onclick="showToast('按状态筛选')">状态 ▼</div>
+          <span style="margin-left:auto;font-size:12px;color:#86909C">共 ${pd.users.length} 人</span>
+        </div>
+        <table class="perm-user-table">
+          <thead><tr><th>姓名</th><th>部门</th><th>角色</th><th>授权系统</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody>${userTableHTML}</tbody>
+        </table>
+      </div>
     </div>
     <div class="footer"><span>X-Data 数据平台 · ${p.name}</span><span>v2.0 · 2026</span></div>
   `;
+}
+
+function selectPermRole(roleId) {
+  document.querySelectorAll('.perm-role-side-item').forEach(el => el.classList.remove('active'));
+  const sideItem = document.querySelector(`.perm-role-side-item[data-role-id="${roleId}"]`);
+  if (sideItem) sideItem.classList.add('active');
+  document.querySelectorAll('.perm-role-detail-panel').forEach(el => el.style.display = 'none');
+  const detailPanel = document.getElementById('roleDetail_' + roleId);
+  if (detailPanel) detailPanel.style.display = 'block';
+}
+
+function getRolePermLevel(permId) {
+  const map = {};
+  // Simplified mapping: admin=2 gets all, owner=2/1 mix, analyst/dev=1 for func+data, business=0 for all, guest=0
+  const idMap = { r_admin:2, r_owner:1, r_analyst:1, r_developer:1, r_business:0, r_guest:0 };
+  return idMap;
+}
+
+function filterPermUsers(query) {
+  document.querySelectorAll('#permUsers .perm-user-table tbody tr').forEach(tr => {
+    const text = (tr.getAttribute('data-search') || '').toLowerCase();
+    tr.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
+  });
 }
 
 function initPermissionTabs() {
@@ -1093,10 +1273,24 @@ function initPermissionTabs() {
       this.classList.add('active');
       const target = this.dataset.tab;
       document.querySelectorAll('.perm-panel').forEach(p => p.style.display = 'none');
-      const panelMap = { systems:'permSystems', perms:'permPerms', roles:'permRoles', users:'permUsers' };
+      const panelMap = { roles:'permRoles', perms:'permPerms', users:'permUsers' };
       const panel = document.getElementById(panelMap[target]);
       if (panel) panel.style.display = 'block';
     });
+  });
+
+  // Init tree expand/collapse for permission tree
+  document.querySelectorAll('.perm-tree-row').forEach(row => {
+    if (row.nextElementSibling && row.nextElementSibling.tagName === 'DIV') {
+      row.addEventListener('click', function(e) {
+        const next = row.nextElementSibling;
+        if (next) {
+          const isOpen = next.style.display === 'block';
+          next.style.display = isOpen ? 'none' : 'block';
+          row.classList.toggle('open', !isOpen);
+        }
+      });
+    }
   });
 }
 
