@@ -1100,10 +1100,6 @@ function initPermissionTabs() {
   });
 }
 
-  setNavTab(tabId || NAV_TAB_MAP[platformId] || 'ntHome');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
 function setNavTab(activeId) {
   ['ntHome','ntIntegration','ntTracking','ntAssetQuality','ntAnalysis','ntApplication','ntAI','ntPermission']
     .forEach(id => { const el = document.getElementById(id); if (el) el.classList.toggle('active', id === activeId); });
