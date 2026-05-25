@@ -104,12 +104,12 @@
     position: absolute; top: calc(100% + 6px); left: 0; transform: none;
     min-width: 560px; max-width: calc(100vw - 32px);
     background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
     padding: 16px;
     display: none; z-index: 999;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 10px;
     animation: menuIn 0.2s ease;
   }
   @keyframes menuIn {
@@ -119,20 +119,21 @@
   .nav-tab:hover .mega-menu { display: grid; }
 
   .mega-card {
-    padding: 12px; border-radius: 8px; cursor: pointer;
-    transition: background 0.15s; text-decoration: none; display: block;
+    padding: 10px; border-radius: 6px; cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.15s; text-decoration: none; display: block;
   }
-  .mega-card:hover { background: #F5F6F8; }
+  .mega-card:hover { background: #F7F8FA; border-color: #E5E6EB; }
   .mega-card-hd {
     display: flex; align-items: center; gap: 8px;
     margin-bottom: 8px;
-    font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap;
+    font-size: 12px; font-weight: 500; color: #1D2129; white-space: nowrap;
   }
-  .mega-card-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .mega-card-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
   .mega-card-tags { display: flex; flex-wrap: wrap; gap: 4px; }
   .mega-card-tag {
-    font-size: 11px; padding: 2px 7px; border-radius: 4px;
-    background: #F5F6F8; color: var(--text-secondary); white-space: nowrap;
+    font-size: 11px; padding: 1px 6px; border-radius: 2px;
+    background: #F2F3F5; color: #86909C; white-space: nowrap;
   }
 
   .nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
@@ -286,71 +287,115 @@
     box-shadow: 0 0 0 0.5px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.06);
   }
 
+  /* ═══════════════ PERMISSION CENTER ═══════════════ */
+  .perm-tabs { display: flex; gap: 0; margin-bottom: 24px; background: #F2F3F5; border-radius: 6px; padding: 3px; width: fit-content; }
+  .perm-tab { padding: 6px 16px; border-radius: 4px; font-size: 13px; color: #4E5969; cursor: pointer; transition: all 0.15s; }
+  .perm-tab.active { background: #fff; color: #1D2129; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+  .perm-tab:hover:not(.active) { color: #1D2129; }
+
+  .perm-section-title { font-size: 15px; font-weight: 600; color: #1D2129; margin-bottom: 16px; }
+
+  .perm-system-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 32px; }
+  .perm-system-item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #F7F8FA; border-radius: 6px; border: 1px solid #E5E6EB; font-size: 12px; color: #4E5969; }
+  .perm-system-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+  .perm-tree { margin-bottom: 32px; }
+  .perm-tree-node { margin-bottom: 4px; }
+  .perm-tree-parent { display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 4px; cursor: pointer; font-size: 13px; color: #1D2129; font-weight: 500; }
+  .perm-tree-parent:hover { background: #F2F3F5; }
+  .perm-tree-arrow { font-size: 10px; color: #86909C; transition: transform 0.2s; width: 14px; text-align: center; }
+  .perm-tree-parent.open .perm-tree-arrow { transform: rotate(90deg); }
+  .perm-tree-children { margin-left: 22px; display: none; }
+  .perm-tree-parent.open + .perm-tree-children { display: block; }
+  .perm-tree-child { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; color: #4E5969; }
+  .perm-tree-child:hover { background: #F2F3F5; }
+  .perm-tree-child-dot { width: 6px; height: 6px; border-radius: 50%; background: #C9CDD4; flex-shrink: 0; }
+  .perm-tree-leaf { padding-left: 16px; }
+  .perm-tree-tag { font-size: 10px; padding: 1px 6px; border-radius: 2px; margin-left: auto; }
+  .perm-tree-tag.read { background: #E8FFEA; color: #00B42A; }
+  .perm-tree-tag.write { background: #FFECE8; color: #F53F3F; }
+
+  .perm-role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+  .perm-role-card { padding: 16px; background: #fff; border: 1px solid #E5E6EB; border-radius: 8px; }
+  .perm-role-card-hd { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .perm-role-card-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .perm-role-card-name { font-size: 14px; font-weight: 500; color: #1D2129; }
+  .perm-role-card-desc { font-size: 12px; color: #86909C; line-height: 1.6; margin-bottom: 10px; }
+  .perm-role-card-count { font-size: 11px; color: #86909C; }
+  .perm-role-card-count strong { color: #1D2129; font-weight: 600; }
+
+  .perm-user-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; font-size: 13px; }
+  .perm-user-table th { text-align: left; padding: 10px 14px; color: #86909C; font-weight: 500; font-size: 12px; border-bottom: 1px solid #E5E6EB; }
+  .perm-user-table td { padding: 12px 14px; color: #1D2129; border-bottom: 1px solid #F2F3F5; }
+  .perm-user-table tr:hover td { background: #F7F8FA; }
+  .perm-user-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 2px; }
+
   /* ═══════════════ PORTAL GRID ═══════════════ */
-  #portalView { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  #portalView { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
   .platform-card {
-    background: var(--bg-card); border-radius: var(--radius-lg);
-    padding: 22px 22px 20px; cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 0.86, 0.44, 1);
+    background: #fff; border: 1px solid #E5E6EB;
+    border-radius: 8px;
+    padding: 20px; cursor: pointer;
+    transition: all 0.2s ease;
     text-decoration: none; display: flex; flex-direction: column;
-    box-shadow: var(--shadow-card);
+    box-shadow: none;
     position: relative;
   }
   .platform-card:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-3px);
+    border-color: #165DFF;
+    box-shadow: 0 2px 12px rgba(22,93,255,0.08);
   }
   .platform-card:active {
     transform: scale(0.985);
-    transition: all 0.1s cubic-bezier(0.16, 0.86, 0.44, 1);
+    transition: all 0.1s ease;
   }
 
-  .pc-hd { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+  .pc-hd { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
   .pc-icon {
-    width: 44px; height: 44px; border-radius: 12px;
+    width: 36px; height: 36px; border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
   }
-  .pc-icon svg { width: 22px; height: 22px; }
-  .pc-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 3px; line-height: 1.3; letter-spacing: -0.02em; }
-  .pc-badge { display: inline-flex; align-items: center; font-size: 11px; padding: 2px 9px; border-radius: 5px; font-weight: 600; }
+  .pc-icon svg { width: 18px; height: 18px; }
+  .pc-title { font-size: 14px; font-weight: 500; color: #1D2129; margin-bottom: 2px; line-height: 1.4; letter-spacing: 0; }
+  .pc-badge { display: inline-flex; align-items: center; font-size: 11px; padding: 1px 8px; border-radius: 2px; font-weight: 400; }
   .pc-desc {
-    font-size: 13px; color: var(--text-secondary); line-height: 1.6;
-    margin-bottom: 16px; flex: 1;
+    font-size: 12px; color: #86909C; line-height: 1.65;
+    margin-bottom: 14px; flex: 1;
     display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
     overflow: hidden;
   }
   .pc-tags { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .pc-tag {
-    font-size: 11.5px; padding: 5px 9px; border-radius: 6px;
-    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+    font-size: 11px; padding: 3px 8px; border-radius: 2px;
+    color: #4E5969; cursor: pointer; transition: all 0.15s;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center;
-    background: var(--fill-quaternary);
+    background: #F2F3F5;
   }
-  .pc-tag:hover { color: var(--blue); background: rgba(0,122,255,0.08); }
+  .pc-tag:hover { color: #165DFF; background: #E8F3FF; }
 
-  /* Apple system color themes */
-  .t-int .pc-icon { background: var(--green); }
-  .t-int .pc-badge { background: #E8F8ED; color: #248A3D; }
-  .t-gov .pc-icon { background: var(--orange); }
-  .t-gov .pc-badge { background: #FFF3E0; color: #C25E00; }
-  .t-trk .pc-icon { background: var(--purple); }
-  .t-trk .pc-badge { background: #F3E8FF; color: #8944AB; }
-  .t-ast .pc-icon { background: var(--blue); }
-  .t-ast .pc-badge { background: #E8F2FF; color: #0056CC; }
-  .t-mtr .pc-icon { background: var(--teal); }
-  .t-mtr .pc-badge { background: #E8F8FF; color: #0071A4; }
-  .t-anl .pc-icon { background: var(--mint); }
-  .t-anl .pc-badge { background: #E0FAF5; color: #008A78; }
-  .t-app .pc-icon { background: var(--red); }
-  .t-app .pc-badge { background: #FFECEE; color: #C41E2C; }
-  .t-cdp .pc-icon { background: var(--pink); }
-  .t-cdp .pc-badge { background: #FFE8F0; color: #C41E50; }
-  .t-prm .pc-icon { background: var(--gray); }
-  .t-prm .pc-badge { background: #F3F3F5; color: #636366; }
-  .t-ai .pc-icon { background: var(--indigo); }
-  .t-ai .pc-badge { background: #EEEAFF; color: #3E3EA7; }
+  /* Arco color themes */
+  .t-int .pc-icon { background: #00B42A; }
+  .t-int .pc-badge { background: #E8FFEA; color: #00B42A; }
+  .t-gov .pc-icon { background: #FF7D00; }
+  .t-gov .pc-badge { background: #FFF7E8; color: #FF7D00; }
+  .t-trk .pc-icon { background: #722ED1; }
+  .t-trk .pc-badge { background: #F5E8FF; color: #722ED1; }
+  .t-ast .pc-icon { background: #165DFF; }
+  .t-ast .pc-badge { background: #E8F3FF; color: #165DFF; }
+  .t-mtr .pc-icon { background: #14C9C9; }
+  .t-mtr .pc-badge { background: #E8FFFB; color: #14C9C9; }
+  .t-anl .pc-icon { background: #0FC6C2; }
+  .t-anl .pc-badge { background: #E8FFFB; color: #0FC6C2; }
+  .t-app .pc-icon { background: #F53F3F; }
+  .t-app .pc-badge { background: #FFECE8; color: #F53F3F; }
+  .t-cdp .pc-icon { background: #F5319D; }
+  .t-cdp .pc-badge { background: #FFE8F1; color: #F5319D; }
+  .t-prm .pc-icon { background: #86909C; }
+  .t-prm .pc-badge { background: #F2F3F5; color: #86909C; }
+  .t-ai .pc-icon { background: #7B61FF; }
+  .t-ai .pc-badge { background: #F0ECFF; color: #7B61FF; }
 
   /* ═══════════════ LANDSCAPE VIEW ═══════════════ */
   .landscape-header { margin-bottom: 24px; }
@@ -532,43 +577,43 @@
       全景<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
         <a class="mega-card" onclick="navTo('integration')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#34C759"></span>XDAP 数据集成</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#00B42A"></span>XDAP 数据集成</div>
           <div class="mega-card-tags"><span class="mega-card-tag">数据源管理</span><span class="mega-card-tag">ETL 任务配置</span><span class="mega-card-tag">任务调度</span><span class="mega-card-tag">实时同步</span></div>
         </a>
         <a class="mega-card" onclick="navTo('tracking')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#AF52DE"></span>迅数平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#722ED1"></span>迅数平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">埋点管理</span><span class="mega-card-tag">事件分析</span><span class="mega-card-tag">漏斗分析</span><span class="mega-card-tag">留存分析</span></div>
         </a>
         <a class="mega-card" onclick="navTo('governance')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF9500"></span>DQC 数据质量</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF7D00"></span>DQC 数据质量</div>
           <div class="mega-card-tags"><span class="mega-card-tag">质量规则配置</span><span class="mega-card-tag">异常检测</span><span class="mega-card-tag">质量报告</span><span class="mega-card-tag">告警通知</span></div>
         </a>
         <a class="mega-card" onclick="navTo('asset')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#007AFF"></span>数据资产平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#165DFF"></span>数据资产平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">资产目录</span><span class="mega-card-tag">元数据管理</span><span class="mega-card-tag">数据血缘</span><span class="mega-card-tag">影响分析</span></div>
         </a>
         <a class="mega-card" onclick="navTo('metric')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#5AC8FA"></span>指标平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#14C9C9"></span>指标平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">指标定义</span><span class="mega-card-tag">指标市场</span><span class="mega-card-tag">口径管理</span><span class="mega-card-tag">指标生产</span></div>
         </a>
         <a class="mega-card" onclick="navTo('adhoc')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#00C7BE"></span>AdHoc 即席查询</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#0FC6C2"></span>AdHoc 即席查询</div>
           <div class="mega-card-tags"><span class="mega-card-tag">SQL 编辑器</span><span class="mega-card-tag">多源联查</span><span class="mega-card-tag">结果可视化</span><span class="mega-card-tag">查询历史</span></div>
         </a>
         <a class="mega-card" onclick="navTo('abtest')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF3B30"></span>A/B 实验平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#F53F3F"></span>A/B 实验平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">实验创建</span><span class="mega-card-tag">流量分配</span><span class="mega-card-tag">统计检验</span><span class="mega-card-tag">实验报告</span></div>
         </a>
         <a class="mega-card" onclick="navTo('cdp')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF2D55"></span>CDP 用户画像</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#F5319D"></span>CDP 用户画像</div>
           <div class="mega-card-tags"><span class="mega-card-tag">用户标签</span><span class="mega-card-tag">人群圈选</span><span class="mega-card-tag">用户画像</span><span class="mega-card-tag">行为分析</span></div>
         </a>
         <a class="mega-card" onclick="navTo('ai')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#5856D6"></span>X-Data AI 助手</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#7B61FF"></span>X-Data AI 助手</div>
           <div class="mega-card-tags"><span class="mega-card-tag">自然语言取数</span><span class="mega-card-tag">智能数据分析</span><span class="mega-card-tag">实验报告生成</span><span class="mega-card-tag">自动图表</span></div>
         </a>
         <a class="mega-card" onclick="navTo('permission')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#8E8E93"></span>权限管理中心</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#86909C"></span>权限管理中心</div>
           <div class="mega-card-tags"><span class="mega-card-tag">成员管理</span><span class="mega-card-tag">角色权限</span><span class="mega-card-tag">权限申请</span><span class="mega-card-tag">审批流程</span></div>
         </a>
       </div>
@@ -579,15 +624,15 @@
       数据资产与质量<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
         <a class="mega-card" onclick="navTo('governance')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF9500"></span>DQC 数据质量</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF7D00"></span>DQC 数据质量</div>
           <div class="mega-card-tags"><span class="mega-card-tag">质量规则配置</span><span class="mega-card-tag">异常检测</span><span class="mega-card-tag">质量报告</span><span class="mega-card-tag">告警通知</span></div>
         </a>
         <a class="mega-card" onclick="navTo('asset')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#007AFF"></span>数据资产平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#165DFF"></span>数据资产平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">资产目录</span><span class="mega-card-tag">元数据管理</span><span class="mega-card-tag">数据血缘</span><span class="mega-card-tag">影响分析</span></div>
         </a>
         <a class="mega-card" onclick="navTo('metric')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#5AC8FA"></span>指标平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#14C9C9"></span>指标平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">指标定义</span><span class="mega-card-tag">指标市场</span><span class="mega-card-tag">口径管理</span><span class="mega-card-tag">指标生产</span></div>
         </a>
       </div>
@@ -596,11 +641,11 @@
       分析<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
         <a class="mega-card" onclick="navTo('adhoc')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#00C7BE"></span>AdHoc 即席查询</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#0FC6C2"></span>AdHoc 即席查询</div>
           <div class="mega-card-tags"><span class="mega-card-tag">SQL 编辑器</span><span class="mega-card-tag">多源联查</span><span class="mega-card-tag">结果可视化</span><span class="mega-card-tag">查询历史</span></div>
         </a>
         <a class="mega-card" onclick="navTo('tracking','ntAnalysis')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#AF52DE"></span>迅数平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#722ED1"></span>迅数平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">埋点管理</span><span class="mega-card-tag">事件分析</span><span class="mega-card-tag">漏斗分析</span><span class="mega-card-tag">留存分析</span></div>
         </a>
       </div>
@@ -609,11 +654,11 @@
       应用<span class="nav-tab-arrow">›</span>
       <div class="mega-menu">
         <a class="mega-card" onclick="navTo('abtest')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF3B30"></span>A/B 实验平台</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#F53F3F"></span>A/B 实验平台</div>
           <div class="mega-card-tags"><span class="mega-card-tag">实验创建</span><span class="mega-card-tag">流量分配</span><span class="mega-card-tag">统计检验</span><span class="mega-card-tag">实验报告</span></div>
         </a>
         <a class="mega-card" onclick="navTo('cdp')">
-          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#FF2D55"></span>CDP 用户画像</div>
+          <div class="mega-card-hd"><span class="mega-card-dot" style="background:#F5319D"></span>CDP 用户画像</div>
           <div class="mega-card-tags"><span class="mega-card-tag">用户标签</span><span class="mega-card-tag">人群圈选</span><span class="mega-card-tag">用户画像</span><span class="mega-card-tag">行为分析</span></div>
         </a>
       </div>
@@ -798,34 +843,86 @@ const MI = {};
 })();
 
 const PLATFORMS = {
-  integration: { id:'integration', name:'XDAP 数据集成平台', category:'数据集成', iconSvg:PI.integration, iconBg:'#34C759', badgeBg:'#E8F8ED', badgeColor:'#248A3D', color:'#34C759',
+  integration: { id:'integration', name:'XDAP 数据集成平台', category:'数据集成', iconSvg:PI.integration, iconBg:'#00B42A', badgeBg:'#E8FFEA', badgeColor:'#00B42A', color:'#00B42A',
     desc:'迅雷统一数据接入与调度平台，覆盖离线批量、准实时与实时三种数据管道模式，支持 100+ 数据源类型接入，保障数据高效、稳定地沉淀到数据仓库。',
     modules:[{ik:'target',n:'数据源管理',d:'管理数据库、API、文件等 100+ 种数据源的连接配置与健康状态。'},{ik:'cog',n:'ETL 任务配置',d:'可视化拖拽配置数据抽取、转换、加载流程，无需编码即可完成数据加工。'},{ik:'clock',n:'任务调度',d:'支持 Cron 表达式与依赖调度，智能管理任务执行顺序与优先级。'},{ik:'refresh',n:'实时同步',d:'基于 CDC 技术实现数据库变更数据实时捕获与同步，延迟 < 1s。'},{ik:'bell',n:'监控告警',d:'任务运行状态实时监控，异常自动触发告警通知（钉钉/邮件/短信）。'},{ik:'doc',n:'运行日志',d:'全量任务运行日志记录，支持失败重试、断点续传与问题快速定位。'}]},
-  governance: { id:'governance', name:'DQC 数据质量平台', category:'数据治理', iconSvg:PI.governance, iconBg:'#FF9500', badgeBg:'#FFF3E0', badgeColor:'#C25E00', color:'#FF9500',
+  governance: { id:'governance', name:'DQC 数据质量平台', category:'数据治理', iconSvg:PI.governance, iconBg:'#FF7D00', badgeBg:'#FFF7E8', badgeColor:'#FF7D00', color:'#FF7D00',
     desc:'覆盖数据质量规则配置、自动化检测、异常预警与质量报告的全链路数据治理平台，帮助团队建立可量化、可追踪的数据质量管控体系。',
     modules:[{ik:'edit',n:'质量规则配置',d:'支持完整性、唯一性、及时性、准确性等多维度质量规则的灵活配置。'},{ik:'search',n:'异常检测',d:'基于规则与统计模型的自动化数据异常检测，支持批次与实时两种模式。'},{ik:'chart',n:'质量报告',d:'可视化质量得分趋势与问题分布，支持按表、按库、按业务域多维聚合。'},{ik:'bell',n:'告警通知',d:'质量问题自动触发多级告警，支持告警分级与责任人指定。'},{ik:'chart',n:'质量趋势',d:'历史质量数据对比分析，识别数据质量改善或劣化趋势。'},{ik:'doc',n:'问题工单',d:'质量问题自动流转工单，记录处理过程与解决方案，形成闭环。'}]},
-  tracking: { id:'tracking', name:'迅数平台', category:'数据埋点与分析', iconSvg:PI.tracking, iconBg:'#AF52DE', badgeBg:'#F3E8FF', badgeColor:'#8944AB', color:'#AF52DE',
+  tracking: { id:'tracking', name:'迅数平台', category:'数据埋点与分析', iconSvg:PI.tracking, iconBg:'#722ED1', badgeBg:'#F5E8FF', badgeColor:'#722ED1', color:'#722ED1',
     desc:'迅雷自研数据埋点与用户行为分析平台，覆盖全端（iOS/Android/Web/小程序）埋点管理与行为数据分析，支持事件分析、漏斗、留存、路径等多种分析模型。',
     modules:[{ik:'target',n:'埋点管理',d:'统一管理全端埋点方案，支持可视化埋点与代码埋点，版本化管理埋点文档。'},{ik:'chart',n:'事件分析',d:'自助分析任意埋点事件的趋势、分布、转化，无需 SQL 即可探索数据。'},{ik:'funnel',n:'漏斗分析',d:'定义多步骤转化漏斗，分析各环节流失率，快速定位转化瓶颈。'},{ik:'refresh',n:'留存分析',d:'分析用户次日/7日/30日留存曲线，支持分群对比与留存归因。'},{ik:'network',n:'路径分析',d:'可视化用户在产品中的真实行为路径，发现非预期的核心使用路径。'},{ik:'eye',n:'用户细查',d:'下钻到单用户行为序列，支持用户分群圈选与行为回放。'}]},
-  asset: { id:'asset', name:'数据资产平台', category:'数据资产', iconSvg:PI.asset, iconBg:'#007AFF', badgeBg:'#E8F2FF', badgeColor:'#0056CC', color:'#007AFF',
+  asset: { id:'asset', name:'数据资产平台', category:'数据资产', iconSvg:PI.asset, iconBg:'#165DFF', badgeBg:'#E8F3FF', badgeColor:'#165DFF', color:'#165DFF',
     desc:'迅雷统一数据资产管理平台，覆盖数据资产目录、元数据管理与数据血缘全链路追踪，让每一张数据表都有据可查、有责可追。',
     modules:[{ik:'folder',n:'资产目录',d:'按业务域与数据层次组织数据资产，支持多维度检索与收藏订阅。'},{ik:'tag',n:'元数据管理',d:'管理表、字段的业务含义、负责人、SLA 等元数据，支持批量编辑。'},{ik:'network',n:'数据血缘',d:'可视化展示数据表的上下游血缘图谱，支持字段级血缘追踪。'},{ik:'chart',n:'影响分析',d:'修改前评估变更影响范围，预防因上游变动导致的下游任务失败。'},{ik:'chart',n:'资产消费',d:'统计数据资产的查询次数、使用方、访问频率，识别高价值资产。'},{ik:'bell',n:'资产预警',d:'监控数据表产出延迟、schema 变更等异常，自动推送告警。'}]},
-  metric: { id:'metric', name:'指标平台', category:'数据资产', iconSvg:PI.metric, iconBg:'#5AC8FA', badgeBg:'#E8F8FF', badgeColor:'#0071A4', color:'#5AC8FA',
+  metric: { id:'metric', name:'指标平台', category:'数据资产', iconSvg:PI.metric, iconBg:'#14C9C9', badgeBg:'#E8FFFB', badgeColor:'#14C9C9', color:'#14C9C9',
     desc:'迅雷企业级指标管理平台，统一定义业务指标口径、管理指标生产流程，构建标准化的指标体系，彻底解决「数据打架」问题。',
     modules:[{ik:'edit',n:'指标定义',d:'规范化定义指标名称、口径、业务含义、计算逻辑，支持版本管理。'},{ik:'folder',n:'指标市场',d:'统一检索平台所有指标，支持订阅、收藏与使用申请。'},{ik:'cog',n:'口径管理',d:'管理同一指标在不同业务口径下的计算差异，防止口径混乱。'},{ik:'cog',n:'指标生产',d:'一键将指标定义转化为数据开发任务，实现指标自动化生产。'},{ik:'bell',n:'指标订阅',d:'订阅关键指标异常波动推送，及时感知业务变化。'},{ik:'clock',n:'版本控制',d:'指标定义变更全程记录，支持历史版本查看与回滚。'}]},
-  adhoc: { id:'adhoc', name:'AdHoc 即席查询平台', category:'分析', iconSvg:PI.adhoc, iconBg:'#00C7BE', badgeBg:'#E0FAF5', badgeColor:'#008A78', color:'#00C7BE',
+  adhoc: { id:'adhoc', name:'AdHoc 即席查询平台', category:'分析', iconSvg:PI.adhoc, iconBg:'#0FC6C2', badgeBg:'#E8FFFB', badgeColor:'#0FC6C2', color:'#0FC6C2',
     desc:'面向数据分析师与业务人员的交互式查询平台，支持多数据源联查、智能 SQL 补全与结果即时可视化，大幅降低数据探索门槛。',
     modules:[{ik:'code',n:'SQL 编辑器',d:'功能完备的在线 SQL 编辑器，支持语法高亮、智能补全与格式化。'},{ik:'network',n:'多源联查',d:'跨数据源关联查询，支持 Hive、MySQL、ClickHouse、Doris 等多引擎。'},{ik:'chart',n:'结果可视化',d:'查询结果一键转为图表（折线/柱状/饼图），支持简单看板搭建。'},{ik:'clock',n:'查询历史',d:'保存全量查询历史，支持收藏常用 SQL 与团队共享查询模板。'},{ik:'download',n:'报表导出',d:'支持 CSV、Excel 格式导出，超大结果集分片下载。'},{ik:'lock',n:'权限管控',d:'细粒度的数据源访问权限控制，防止敏感数据越权查询。'}]},
-  abtest: { id:'abtest', name:'A/B 实验平台', category:'应用', iconSvg:PI.abtest, iconBg:'#FF3B30', badgeBg:'#FFECEE', badgeColor:'#C41E2C', color:'#FF3B30',
+  abtest: { id:'abtest', name:'A/B 实验平台', category:'应用', iconSvg:PI.abtest, iconBg:'#F53F3F', badgeBg:'#FFECE8', badgeColor:'#F53F3F', color:'#F53F3F',
     desc:'迅雷全流程 A/B 实验管理平台，支持实验创建、流量分配、多指标统计检验与实验报告生成，帮助产品与运营团队用数据驱动每一个决策。',
     modules:[{ik:'cog',n:'实验创建',d:'快速创建 A/B 实验或多变量实验，配置实验分组与变量参数。'},{ik:'target',n:'流量分配',d:'精细化流量切分，支持按用户属性、设备、地域等多维度定向分流。'},{ik:'chart',n:'统计检验',d:'内置 T 检验、CUPED 方差缩减等统计方法，自动计算显著性与置信度。'},{ik:'doc',n:'实验报告',d:'实验效果自动汇总报告，含一句话决策建议与归因探索分析。'},{ik:'lock',n:'互斥管理',d:'实验层/互斥组配置，防止多实验之间的干扰与流量冲突。'},{ik:'refresh',n:'灰度发布',d:'实验结论确认后一键推全，支持渐进式灰度放量与回滚。'}]},
-  cdp: { id:'cdp', name:'CDP 用户画像平台', category:'应用', iconSvg:PI.cdp, iconBg:'#FF2D55', badgeBg:'#FFE8F0', badgeColor:'#C41E50', color:'#FF2D55',
+  cdp: { id:'cdp', name:'CDP 用户画像平台', category:'应用', iconSvg:PI.cdp, iconBg:'#F5319D', badgeBg:'#FFE8F1', badgeColor:'#F5319D', color:'#F5319D',
     desc:'迅雷统一用户数据平台，整合多端用户行为与属性数据，构建 360° 用户画像，支持精准人群圈选与智能标签体系，赋能精细化运营。',
     modules:[{ik:'tag',n:'用户标签',d:'沉淀 1000+ 用户属性与行为标签，支持自定义标签规则与定时更新。'},{ik:'user',n:'人群圈选',d:'基于标签组合圈选目标人群，支持实时预估人群规模。'},{ik:'user',n:'用户画像',d:'多维度可视化用户画像，呈现年龄、地域、活跃度、偏好等分布。'},{ik:'chart',n:'行为分析',d:'分析不同人群的行为路径差异，识别高价值用户特征。'},{ik:'download',n:'人群导出',d:'一键导出圈定人群的设备 ID，对接推送、广告投放等下游系统。'},{ik:'refresh',n:'人群同步',d:'定时同步人群至第三方平台（短信/Push/广告），实现自动化触达。'}]},
-  permission: { id:'permission', name:'权限管理中心', category:'权限', iconSvg:PI.permission, iconBg:'#8E8E93', badgeBg:'#F3F3F5', badgeColor:'#636366', color:'#8E8E93',
+  permission: { id:'permission', name:'权限管理中心', category:'权限', iconSvg:PI.permission, iconBg:'#86909C', badgeBg:'#F2F3F5', badgeColor:'#86909C', color:'#86909C',
     desc:'统一管理 X-Data 所有平台的成员权限与数据访问控制，支持基于角色的权限分配、自助申请审批流程与权限使用看板，保障数据安全合规。',
-    modules:[{ik:'user',n:'成员管理',d:'统一管理各平台成员账号，支持批量导入与部门组织架构同步。'},{ik:'check',n:'角色权限',d:'预置多级角色模板（管理员/分析师/只读等），支持自定义权限组合。'},{ik:'doc',n:'权限申请',d:'员工自助发起数据权限申请，自动路由至负责人审批。'},{ik:'check',n:'审批流程',d:'可配置多级审批链路，支持超时自动提醒与代理审批。'},{ik:'doc',n:'访问日志',d:'记录所有数据访问行为，支持合规审计与异常访问追溯。'},{ik:'eye',n:'数据脱敏',d:'对敏感字段进行动态脱敏展示，最小化数据暴露风险。'}]},
-  ai: { id:'ai', name:'X-Data AI 智能助手', category:'AI', iconSvg:PI.ai, iconBg:'#5856D6', badgeBg:'#EEEAFF', badgeColor:'#3E3EA7', color:'#5856D6',
+    modules:[
+      {ik:'user',n:'成员管理',d:'统一管理各平台成员账号，支持批量导入与部门组织架构同步。'},
+      {ik:'check',n:'角色权限',d:'预置多级角色模板（管理员/分析师/只读等），支持自定义权限组合。'},
+      {ik:'doc',n:'权限申请',d:'员工自助发起数据权限申请，自动路由至负责人审批。'},
+      {ik:'check',n:'审批流程',d:'可配置多级审批链路，支持超时自动提醒与代理审批。'},
+      {ik:'doc',n:'访问日志',d:'记录所有数据访问行为，支持合规审计与异常访问追溯。'},
+      {ik:'eye',n:'数据脱敏',d:'对敏感字段进行动态脱敏展示，最小化数据暴露风险。'}
+    ],
+    permissionDetail: {
+      systems: [
+        { name:'XDAP 数据集成', icon:'#00B42A' },
+        { name:'DQC 数据质量', icon:'#FF7D00' },
+        { name:'迅数平台', icon:'#722ED1' },
+        { name:'数据资产', icon:'#165DFF' },
+        { name:'指标平台', icon:'#14C9C9' },
+        { name:'AdHoc 查询', icon:'#0FC6C2' },
+        { name:'A/B 实验', icon:'#F53F3F' },
+        { name:'CDP 画像', icon:'#F5319D' },
+        { name:'AI 助手', icon:'#7B61FF' }
+      ],
+      permTree: [
+        { name:'系统管理', children:[
+          { name:'平台配置' }, { name:'服务启停' }, { name:'版本管理' }
+        ]},
+        { name:'数据访问', children:[
+          { name:'数据库', children:[{name:'生产库'},{name:'测试库'},{name:'归档库'}] },
+          { name:'数据表' },
+          { name:'数据列' }
+        ]},
+        { name:'功能权限', children:[
+          { name:'任务管理' }, { name:'报告管理' }, { name:'导出下载' }
+        ]},
+        { name:'管理权限', children:[
+          { name:'成员管理' }, { name:'角色管理' }, { name:'审批管理' }, { name:'审计日志' }
+        ]}
+      ],
+      roles: [
+        { name:'系统管理员', desc:'全局最高权限，拥有所有平台与功能的完全控制权。', color:'#F53F3F', members:2 },
+        { name:'平台负责人', desc:'负责特定平台的配置管理与服务维护。', color:'#FF7D00', members:8 },
+        { name:'数据分析师', desc:'拥有数据查询与分析权限，可访问授权范围内的数据表。', color:'#165DFF', members:35 },
+        { name:'业务人员', desc:'只读浏览权限，可查看授权数据与报表，不可执行查询。', color:'#14C9C9', members:120 },
+        { name:'开发者', desc:'拥有开发环境使用权，可发布任务与配置 ETL 流程。', color:'#722ED1', members:18 },
+        { name:'访客', desc:'最低权限，仅可查看公开数据资产目录与指标市场。', color:'#86909C', members:50 }
+      ],
+      users: [
+        { name:'张明', dept:'数据平台部', role:'系统管理员', systems:'全部平台' },
+        { name:'李芳', dept:'数据平台部', role:'平台负责人', systems:'XDAP, DQC' },
+        { name:'王磊', dept:'增长分析组', role:'数据分析师', systems:'迅数, AdHoc' },
+        { name:'陈静', dept:'产品运营部', role:'业务人员', systems:'A/B 实验, CDP' },
+        { name:'赵强', dept:'数据开发组', role:'开发者', systems:'XDAP, 指标平台' }
+      ]
+    }
+  },
+  ai: { id:'ai', name:'X-Data AI 智能助手', category:'AI', iconSvg:PI.ai, iconBg:'#7B61FF', badgeBg:'#F0ECFF', badgeColor:'#7B61FF', color:'#7B61FF',
     desc:'基于大语言模型的智能数据助手，支持自然语言取数、智能数据解读、A/B 实验报告自动生成与数据问答，让每个人都能「说人话」查数据。',
     modules:[{ik:'code',n:'自然语言取数',d:'用自然语言描述需求，AI 自动生成并执行 SQL，查询结果直接可视化展示。'},{ik:'search',n:'智能数据分析',d:'对查询结果自动进行趋势分析、异常检测与归因探索，无需手写分析逻辑。'},{ik:'doc',n:'实验报告生成',d:'对接 A/B 实验平台，自动汇总实验结果并生成标准化实验分析报告。'},{ik:'chart',n:'自动图表',d:'AI 智能推荐最佳可视化图表类型，一键生成符合业务习惯的数据图表。'},{ik:'refresh',n:'数据解读',d:'对任意数据指标提供自然语言解读，解释波动原因与业务含义。'},{ik:'bell',n:'智能问答',d:'基于数据知识库的智能问答，支持指标口径查询与数据问题即时解答。'}]}
 };
@@ -872,16 +969,85 @@ function navTo(platformId, tabId) {
   const dv = document.getElementById('detailView');
   dv.style.display = 'block';
 
-  const modsHTML = p.modules.map(m => {
-    const svg = (MI[m.ik] || MI.cog).replace(/COLOR/g, p.color);
-    return `<div class="detail-module" onclick="showToast('进入${m.n}')">
-      <div class="dm-icon" style="background:${p.iconBg}">${svg}</div>
-      <div class="detail-module-title">${m.n}</div>
-      <div class="detail-module-desc">${m.d}</div>
-    </div>`;
+  if (platformId === 'permission') {
+    dv.innerHTML = renderPermissionDetail(p);
+    initPermissionTabs();
+  } else {
+    const modsHTML = p.modules.map(m => {
+      const svg = (MI[m.ik] || MI.cog).replace(/COLOR/g, p.color);
+      return `<div class="detail-module" onclick="showToast('进入${m.n}')">
+        <div class="dm-icon" style="background:${p.iconBg}">${svg}</div>
+        <div class="detail-module-title">${m.n}</div>
+        <div class="detail-module-desc">${m.d}</div>
+      </div>`;
+    }).join('');
+
+    dv.innerHTML = `
+      <div class="detail-back" onclick="goHome()">← 返回门户</div>
+      <div class="detail-hero">
+        <div class="detail-hero-icon" style="background:${p.iconBg}">${p.iconSvg}</div>
+        <div class="detail-hero-text">
+          <div class="detail-hero-badge" style="background:${p.badgeBg};color:${p.badgeColor}">${p.category}</div>
+          <h1>${p.name}</h1>
+          <p>${p.desc}</p>
+        </div>
+      </div>
+      <div class="detail-grid">${modsHTML}</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:48px">
+        <button class="detail-entry-btn" onclick="showToast('正在跳转到 ${p.name}…')">
+          进入 ${p.name}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <span style="font-size:13px;color:var(--text-tertiary)">点击功能模块可跳转对应子功能</span>
+      </div>
+      <div class="footer"><span>X-Data 数据平台 · ${p.name}</span><span>v2.0 · 2026</span></div>
+    `;
+  }
+
+  setNavTab(tabId || NAV_TAB_MAP[platformId] || 'ntHome');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderPermissionDetail(p) {
+  const pd = p.permissionDetail;
+  const sysHTML = pd.systems.map(s => `<div class="perm-system-item"><span class="perm-system-dot" style="background:${s.icon}"></span>${s.name}</div>`).join('');
+
+  function renderTreeNode(node, depth) {
+    if (node.children) {
+      return `<div class="perm-tree-node">
+        <div class="perm-tree-parent" onclick="this.classList.toggle('open')">
+          <span class="perm-tree-arrow">▶</span>${node.name}
+        </div>
+        <div class="perm-tree-children">${node.children.map(c => renderTreeNode(c, depth+1)).join('')}</div>
+      </div>`;
+    } else {
+      const leafClass = depth > 2 ? ' perm-tree-leaf' : '';
+      return `<div class="perm-tree-child${leafClass}"><span class="perm-tree-child-dot"></span>${node.name}<span class="perm-tree-tag read">读</span><span class="perm-tree-tag write">写</span></div>`;
+    }
+  }
+  const treeHTML = pd.permTree.map(n => renderTreeNode(n, 1)).join('');
+
+  const roleHTML = pd.roles.map(r => `
+    <div class="perm-role-card">
+      <div class="perm-role-card-hd">
+        <span class="perm-role-card-dot" style="background:${r.color}"></span>
+        <span class="perm-role-card-name">${r.name}</span>
+      </div>
+      <div class="perm-role-card-desc">${r.desc}</div>
+      <div class="perm-role-card-count">成员数 <strong>${r.members}</strong></div>
+    </div>
+  `).join('');
+
+  const userHTML = pd.users.map(u => {
+    const rb = p.modules.find(m => m.n === '角色权限');
+    return `<tr>
+      <td>${u.name}</td><td>${u.dept}</td>
+      <td><span class="perm-user-badge" style="background:#F2F3F5;color:#4E5969">${u.role}</span></td>
+      <td>${u.systems}</td>
+    </tr>`;
   }).join('');
 
-  dv.innerHTML = `
+  return `
     <div class="detail-back" onclick="goHome()">← 返回门户</div>
     <div class="detail-hero">
       <div class="detail-hero-icon" style="background:${p.iconBg}">${p.iconSvg}</div>
@@ -891,16 +1057,48 @@ function navTo(platformId, tabId) {
         <p>${p.desc}</p>
       </div>
     </div>
-    <div class="detail-grid">${modsHTML}</div>
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:48px">
-      <button class="detail-entry-btn" onclick="showToast('正在跳转到 ${p.name}…')">
-        进入 ${p.name}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </button>
-      <span style="font-size:13px;color:var(--text-tertiary)">点击功能模块可跳转对应子功能</span>
+    <div class="perm-tabs">
+      <div class="perm-tab active" data-tab="systems">系统管理</div>
+      <div class="perm-tab" data-tab="perms">权限目录</div>
+      <div class="perm-tab" data-tab="roles">角色管理</div>
+      <div class="perm-tab" data-tab="users">用户管理</div>
+    </div>
+    <div class="perm-panel" id="permSystems">
+      <div class="perm-section-title">已接入系统（${pd.systems.length}）</div>
+      <div class="perm-system-grid">${sysHTML}</div>
+    </div>
+    <div class="perm-panel" id="permPerms" style="display:none">
+      <div class="perm-section-title">权限目录树</div>
+      <div class="perm-tree">${treeHTML}</div>
+    </div>
+    <div class="perm-panel" id="permRoles" style="display:none">
+      <div class="perm-section-title">角色定义（${pd.roles.length}）</div>
+      <div class="perm-role-grid">${roleHTML}</div>
+    </div>
+    <div class="perm-panel" id="permUsers" style="display:none">
+      <div class="perm-section-title">用户列表</div>
+      <table class="perm-user-table">
+        <thead><tr><th>姓名</th><th>部门</th><th>角色</th><th>授权系统</th></tr></thead>
+        <tbody>${userHTML}</tbody>
+      </table>
     </div>
     <div class="footer"><span>X-Data 数据平台 · ${p.name}</span><span>v2.0 · 2026</span></div>
   `;
+}
+
+function initPermissionTabs() {
+  document.querySelectorAll('.perm-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.perm-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const target = this.dataset.tab;
+      document.querySelectorAll('.perm-panel').forEach(p => p.style.display = 'none');
+      const panelMap = { systems:'permSystems', perms:'permPerms', roles:'permRoles', users:'permUsers' };
+      const panel = document.getElementById(panelMap[target]);
+      if (panel) panel.style.display = 'block';
+    });
+  });
+}
 
   setNavTab(tabId || NAV_TAB_MAP[platformId] || 'ntHome');
   window.scrollTo({ top: 0, behavior: 'smooth' });
