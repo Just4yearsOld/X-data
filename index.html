@@ -603,14 +603,37 @@
   <div class="nav-logo" onclick="goHome()">
     <div class="nav-logo-icon">
       <svg viewBox="0 0 36 36">
-        <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" stroke-dasharray="4 4"/>
-        <circle cx="18" cy="4" r="1.5" fill="rgba(255,255,255,0.5)"/>
-        <circle cx="18" cy="32" r="1.5" fill="rgba(255,255,255,0.5)"/>
-        <circle cx="4" cy="18" r="1.5" fill="rgba(255,255,255,0.5)"/>
-        <circle cx="32" cy="18" r="1.5" fill="rgba(255,255,255,0.5)"/>
-        <line x1="9" y1="9" x2="27" y2="27" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-        <line x1="27" y1="9" x2="9" y2="27" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="18" cy="18" r="2.8" fill="#fff"/>
+        <!-- 六边形外框 — 数据处理单元 -->
+        <polygon points="18,2 31.5,9 31.5,27 18,34 4.5,27 4.5,9"
+          fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.2" stroke-linejoin="round"/>
+        
+        <!-- 四角数据节点 -->
+        <circle cx="9.5" cy="9.5" r="2.2" fill="rgba(255,255,255,0.75)"/>
+        <circle cx="26.5" cy="9.5" r="2.2" fill="rgba(255,255,255,0.75)"/>
+        <circle cx="9.5" cy="26.5" r="2.2" fill="rgba(255,255,255,0.75)"/>
+        <circle cx="26.5" cy="26.5" r="2.2" fill="rgba(255,255,255,0.75)"/>
+        
+        <!-- X 形数据流主束 -->
+        <line x1="9.5" y1="9.5" x2="26.5" y2="26.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+        <line x1="26.5" y1="9.5" x2="9.5" y2="26.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+        
+        <!-- 数据微粒 — 沿 X 束分布 -->
+        <circle cx="13.5" cy="13.5" r="1" fill="rgba(255,255,255,0.45)"/>
+        <circle cx="22.5" cy="13.5" r="1" fill="rgba(255,255,255,0.45)"/>
+        <circle cx="13.5" cy="22.5" r="1" fill="rgba(255,255,255,0.45)"/>
+        <circle cx="22.5" cy="22.5" r="1" fill="rgba(255,255,255,0.45)"/>
+        
+        <!-- 中心枢纽 — 高亮核心 -->
+        <circle cx="18" cy="18" r="4.5" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.8"/>
+        <circle cx="18" cy="18" r="3" fill="#fff"/>
+        
+        <!-- 六边形顶点标记 -->
+        <circle cx="18" cy="2" r="1.5" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="31.5" cy="9" r="1.5" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="31.5" cy="27" r="1.5" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="18" cy="34" r="1.5" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="4.5" cy="27" r="1.5" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="4.5" cy="9" r="1.5" fill="rgba(255,255,255,0.5)"/>
       </svg>
     </div>
     数据中心
