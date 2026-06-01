@@ -595,6 +595,305 @@
     .hero-preview-card { transform: none !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
     .hero-preview-card:nth-child(2), .hero-preview-card:nth-child(3) { transform: none !important; box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important; }
   }
+
+  /* ═══════════════════════════════════════════
+     WELCOME PAGE
+  ═══════════════════════════════════════════ */
+
+  /* Welcome 欢迎横幅 */
+  .wc-banner {
+    background: linear-gradient(135deg, #EEF3FF 0%, #F5F0FF 50%, #EEF7FF 100%);
+    border-radius: var(--radius-lg);
+    padding: 22px 28px;
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0,122,255,0.08);
+    position: relative; overflow: hidden;
+  }
+  .wc-banner::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, rgba(0,122,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .wc-avatar {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: #fff;
+    flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,122,255,0.28);
+    letter-spacing: 0;
+  }
+  .wc-banner-main { flex: 1; min-width: 0; }
+  .wc-greeting {
+    font-size: 17px; font-weight: 600; color: var(--text);
+    letter-spacing: -0.3px; line-height: 1.35;
+  }
+  .wc-greeting span { color: var(--blue); }
+  .wc-meta {
+    font-size: 12px; color: var(--text-tertiary); margin-top: 3px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .wc-meta-sep { opacity: 0.4; }
+  .wc-banner-actions { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+  .wc-action-item {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    cursor: pointer; padding: 6px 10px; border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .wc-action-item:hover { background: rgba(0,0,0,0.04); }
+  .wc-action-num {
+    font-size: 18px; font-weight: 700; color: var(--text);
+    line-height: 1; position: relative;
+  }
+  .wc-action-num .wc-badge {
+    position: absolute; top: -3px; right: -10px;
+    background: var(--red); color: #fff;
+    font-size: 9px; font-weight: 600; padding: 1px 4px; border-radius: 6px;
+    line-height: 1.4;
+  }
+  .wc-action-label { font-size: 11px; color: var(--text-secondary); white-space: nowrap; }
+  .wc-action-icon {
+    width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+    color: var(--text-secondary);
+  }
+
+  /* Welcome 主布局：左主区 + 右侧边栏 */
+  .wc-layout {
+    display: grid; grid-template-columns: 1fr 280px; gap: 16px;
+    align-items: start;
+  }
+  .wc-main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .wc-sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+  /* 通用 section 卡片 */
+  .wc-section {
+    background: var(--bg-card); border-radius: var(--radius-md);
+    border: 1px solid var(--separator-opaque);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  .wc-section-hd {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 18px 0;
+  }
+  .wc-section-icon {
+    width: 22px; height: 22px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .wc-section-title {
+    font-size: 13px; font-weight: 600; color: var(--text);
+    flex: 1;
+  }
+  .wc-section-badge {
+    font-size: 11px; color: var(--text-secondary);
+    background: var(--fill-quaternary); padding: 2px 8px; border-radius: 10px;
+  }
+  .wc-section-link {
+    font-size: 12px; color: var(--blue); cursor: pointer;
+    padding: 2px 0;
+  }
+  .wc-section-link:hover { opacity: 0.75; }
+
+  /* 今日待办 */
+  .wc-todo-tabs {
+    display: flex; gap: 0; padding: 10px 18px 0;
+    border-bottom: 1px solid var(--separator);
+  }
+  .wc-todo-tab {
+    font-size: 12px; font-weight: 500; color: var(--text-secondary);
+    padding: 6px 12px; cursor: pointer; border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: all 0.15s; white-space: nowrap;
+    border-radius: 4px 4px 0 0;
+  }
+  .wc-todo-tab.active { color: var(--blue); border-bottom-color: var(--blue); background: rgba(0,122,255,0.05); }
+  .wc-todo-tab:hover:not(.active) { color: var(--text); }
+
+  .wc-todo-body { padding: 14px 18px 16px; }
+  .wc-todo-platform {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px;
+  }
+  .wc-todo-platform-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .wc-todo-platform-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .wc-todo-platform-info { font-size: 11px; color: var(--text-tertiary); }
+
+  .wc-todo-count {
+    font-size: 36px; font-weight: 700; color: var(--text);
+    line-height: 1; margin-bottom: 6px; letter-spacing: -1px;
+  }
+  .wc-todo-hint { font-size: 12px; color: var(--text-secondary); }
+  .wc-todo-empty {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 6px; padding: 12px 0 4px;
+    color: var(--text-tertiary); font-size: 12px;
+  }
+  .wc-todo-empty-icon {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #E8F8EE; display: flex; align-items: center; justify-content: center;
+    color: var(--green);
+  }
+  .wc-todo-items { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .wc-todo-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; background: var(--fill-quaternary); border-radius: 8px;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .wc-todo-item:hover { background: rgba(0,122,255,0.06); }
+  .wc-todo-item-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .wc-todo-item-name { font-size: 13px; color: var(--text); flex: 1; }
+  .wc-todo-item-time { font-size: 11px; color: var(--text-tertiary); white-space: nowrap; }
+
+  /* 快速一键直达 */
+  .wc-quick-search {
+    margin: 10px 18px 0;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--fill-quaternary); border-radius: 8px;
+    padding: 8px 12px; cursor: text;
+    border: 1px solid transparent; transition: all 0.15s;
+  }
+  .wc-quick-search:hover { background: var(--fill-tertiary); }
+  .wc-quick-search input {
+    flex: 1; border: none; background: transparent; outline: none;
+    font-size: 13px; color: var(--text); font-family: inherit;
+  }
+  .wc-quick-search input::placeholder { color: var(--text-tertiary); }
+  .wc-quick-search svg { color: var(--text-tertiary); flex-shrink: 0; }
+
+  .wc-quick-inner { padding: 12px 18px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .wc-func-block h4 {
+    font-size: 11px; font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .wc-func-filter {
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;
+  }
+  .wc-func-chip {
+    font-size: 11px; padding: 3px 10px; border-radius: 12px;
+    cursor: pointer; transition: all 0.15s; user-select: none;
+    background: var(--fill-quaternary); color: var(--text-secondary);
+    border: 1px solid transparent;
+  }
+  .wc-func-chip.active {
+    background: rgba(0,122,255,0.1); color: var(--blue);
+    border-color: rgba(0,122,255,0.2);
+  }
+  .wc-func-chip:hover:not(.active) { background: var(--fill-tertiary); color: var(--text); }
+
+  .wc-func-list { display: flex; flex-direction: column; gap: 2px; }
+  .wc-func-item {
+    display: flex; align-items: center; gap: 6px;
+    padding: 5px 8px; border-radius: 6px; cursor: pointer;
+    transition: background 0.12s; text-decoration: none;
+  }
+  .wc-func-item:hover { background: var(--fill-quaternary); }
+  .wc-func-item-icon {
+    width: 14px; height: 14px; border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; opacity: 0.7;
+  }
+  .wc-func-item-name { font-size: 12px; color: var(--text); }
+
+  /* 我的快捷入口 */
+  .wc-shortcuts-block h4 {
+    font-size: 11px; font-weight: 600; color: var(--text-secondary);
+    letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .wc-shortcut-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .wc-shortcut-item {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 10px; background: var(--fill-quaternary); border-radius: 8px;
+    cursor: pointer; transition: all 0.15s; border: 1px solid transparent;
+  }
+  .wc-shortcut-item:hover { background: rgba(0,122,255,0.06); border-color: rgba(0,122,255,0.12); }
+  .wc-shortcut-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .wc-shortcut-name { font-size: 12px; color: var(--text); line-height: 1.3; }
+  .wc-shortcut-add {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; padding: 12px; background: var(--fill-quaternary);
+    border-radius: 8px; cursor: pointer; transition: background 0.15s;
+    border: 1.5px dashed var(--gray4); grid-column: 1 / -1;
+  }
+  .wc-shortcut-add:hover { background: rgba(0,122,255,0.04); border-color: rgba(0,122,255,0.25); }
+  .wc-shortcut-add-text { font-size: 12px; color: var(--text-tertiary); }
+
+  /* 侧边栏 — 产品服务 */
+  .wc-products-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 4px; padding: 12px 14px 14px;
+  }
+  .wc-prod-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 10px 4px; border-radius: 8px; cursor: pointer;
+    transition: background 0.15s; text-align: center;
+  }
+  .wc-prod-item:hover { background: var(--fill-quaternary); }
+  .wc-prod-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .wc-prod-icon svg { width: 18px; height: 18px; }
+  .wc-prod-name { font-size: 11px; color: var(--text-secondary); line-height: 1.3; }
+
+  /* 侧边栏 — 站内信 */
+  .wc-msg-list { padding: 8px 16px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .wc-msg-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 6px; border-radius: 6px; cursor: pointer;
+    transition: background 0.12s;
+  }
+  .wc-msg-item:hover { background: var(--fill-quaternary); }
+  .wc-msg-from { font-size: 12px; font-weight: 600; color: var(--blue); }
+  .wc-msg-preview { font-size: 12px; color: var(--text-secondary); flex: 1; margin: 0 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .wc-msg-time { font-size: 11px; color: var(--text-tertiary); white-space: nowrap; }
+
+  /* 侧边栏 — 帮助中心 */
+  .wc-help-list { padding: 8px 16px 14px; display: flex; flex-direction: column; gap: 1px; }
+  .wc-help-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 4px; border-radius: 6px; cursor: pointer;
+    transition: background 0.12s; text-decoration: none;
+  }
+  .wc-help-item:hover { background: var(--fill-quaternary); }
+  .wc-help-item svg { color: var(--text-tertiary); flex-shrink: 0; }
+  .wc-help-item span { font-size: 12px; color: var(--text-secondary); }
+  .wc-help-item:hover span { color: var(--text); }
+
+  /* 顶部 tab 新增 "工作台" */
+  .wc-switcher {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 18px;
+  }
+  .wc-switch-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 8px; cursor: pointer;
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    background: transparent; border: none; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .wc-switch-btn.active {
+    background: var(--bg-card); color: var(--text);
+    box-shadow: var(--shadow-card);
+  }
+  .wc-switch-btn:hover:not(.active) { background: var(--fill-quaternary); }
+
+  @media (max-width: 1100px) {
+    .wc-layout { grid-template-columns: 1fr 240px; }
+  }
+  @media (max-width: 900px) {
+    .wc-layout { grid-template-columns: 1fr; }
+    .wc-sidebar { display: grid; grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .wc-banner { padding: 16px 18px; }
+    .wc-greeting { font-size: 15px; }
+    .wc-quick-inner { grid-template-columns: 1fr; }
+    .wc-sidebar { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -735,6 +1034,10 @@
   </div>
 
   <div class="nav-actions">
+    <div class="nav-icon-btn" onclick="showWelcome()" title="工作台" style="font-size:11px;font-weight:600;gap:4px;padding:0 10px;min-width:auto">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      工作台
+    </div>
     <div class="nav-search">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       搜索平台、功能、文档…
@@ -747,6 +1050,314 @@
 </nav>
 
 <main class="main">
+
+  <!-- ══════════════════ WELCOME VIEW ══════════════════ -->
+  <div id="welcomeView" style="display:none">
+
+    <!-- 欢迎横幅 -->
+    <div class="wc-banner">
+      <div class="wc-avatar">荣</div>
+      <div class="wc-banner-main">
+        <div class="wc-greeting">下午好，<span>荣凯升</span>～ 愿好心情伴你一整天</div>
+        <div class="wc-meta">
+          <span>ID: 1024</span>
+          <span class="wc-meta-sep">·</span>
+          <span id="wcClock">2026年06月01日 10:24:20</span>
+        </div>
+      </div>
+      <div class="wc-banner-actions">
+        <div class="wc-action-item" onclick="showToast('前往站内信')">
+          <div class="wc-action-num">3<span class="wc-badge">3</span></div>
+          <div class="wc-action-label">未读站内信</div>
+        </div>
+        <div style="width:1px;height:36px;background:var(--separator);"></div>
+        <div class="wc-action-item" onclick="showToast('前往个人中心')">
+          <div class="wc-action-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>
+          </div>
+          <div class="wc-action-label">个人中心</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 视图切换 -->
+    <div class="wc-switcher">
+      <button class="wc-switch-btn active" id="wcTabWork" onclick="wcSwitch('work')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        工作台
+      </button>
+      <button class="wc-switch-btn" id="wcTabPortal" onclick="goHome()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 000 18" stroke-linecap="round"/><line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round"/></svg>
+        产品门户
+      </button>
+    </div>
+
+    <!-- 主区 + 侧边栏 -->
+    <div class="wc-layout">
+
+      <!-- 左主区 -->
+      <div class="wc-main">
+
+        <!-- 今日待办 -->
+        <div class="wc-section">
+          <div class="wc-section-hd">
+            <div class="wc-section-icon" style="background:#FFF3EB">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF7D00" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="2.5"/><line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round"/><line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round"/><line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round"/><polyline points="8,14 11,17 16,13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="wc-section-title">今日待办事项</div>
+            <div class="wc-section-badge">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:3px;vertical-align:middle"><circle cx="12" cy="12" r="9"/><polyline points="8,12 11,15 16,10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              共 1 个待办
+            </div>
+            <div class="wc-section-link" onclick="showToast('查看全部待办')">查看全部</div>
+          </div>
+
+          <!-- 平台 tabs -->
+          <div class="wc-todo-tabs">
+            <div class="wc-todo-tab active" onclick="wcTodoTab(this, 'abtest')">A/B 实验平台</div>
+            <div class="wc-todo-tab" onclick="wcTodoTab(this, 'xdap')">XDAP 数据集成</div>
+            <div class="wc-todo-tab" onclick="wcTodoTab(this, 'dqc')">DQC 数据质量</div>
+            <div class="wc-todo-tab" onclick="wcTodoTab(this, 'cdp')">CDP 用户画像</div>
+          </div>
+
+          <div class="wc-todo-body" id="wcTodoBody">
+            <div class="wc-todo-platform">
+              <div class="wc-todo-platform-dot" style="background:#F53F3F"></div>
+              <div class="wc-todo-platform-name">A/B 实验平台</div>
+              <div class="wc-todo-platform-info">近期待审批任务，请关注</div>
+            </div>
+            <div class="wc-todo-count">1</div>
+            <div class="wc-todo-hint">条待处理实验审批</div>
+            <div class="wc-todo-items">
+              <div class="wc-todo-item" onclick="navTo('abtest')">
+                <div class="wc-todo-item-dot" style="background:#F53F3F"></div>
+                <div class="wc-todo-item-name">月卡支付宝新扣费模式 A/B 实验 — 待审批</div>
+                <div class="wc-todo-item-time">今日 09:30</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 快速一键直达 -->
+        <div class="wc-section">
+          <div class="wc-section-hd">
+            <div class="wc-section-icon" style="background:#EEF3FF">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.2"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10"/></svg>
+            </div>
+            <div class="wc-section-title">快速一键直达</div>
+          </div>
+
+          <!-- 搜索框 -->
+          <div class="wc-quick-search" onclick="this.querySelector('input').focus()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="wcFuncSearch" placeholder="搜索产品功能，即可快速跳转" oninput="wcFilterFuncs(this.value)"/>
+          </div>
+
+          <div class="wc-quick-inner">
+            <!-- 功能推荐 -->
+            <div class="wc-func-block">
+              <h4>功能推荐</h4>
+              <div class="wc-func-filter">
+                <div class="wc-func-chip active" data-cat="all" onclick="wcFuncCat(this,'all')">全部</div>
+                <div class="wc-func-chip" data-cat="data" onclick="wcFuncCat(this,'data')">数据接入</div>
+                <div class="wc-func-chip" data-cat="analysis" onclick="wcFuncCat(this,'analysis')">数据分析</div>
+                <div class="wc-func-chip" data-cat="app" onclick="wcFuncCat(this,'app')">应用</div>
+                <div class="wc-func-chip" data-cat="admin" onclick="wcFuncCat(this,'admin')">管理员</div>
+              </div>
+              <div class="wc-func-list" id="wcFuncList">
+                <a class="wc-func-item" data-cat="data" onclick="navTo('integration')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B42A" stroke-width="2.5"><polyline points="8,17 3,12 8,7"/><polyline points="16,7 21,12 16,17"/></svg></div>
+                  <div class="wc-func-item-name">数据源管理</div>
+                </a>
+                <a class="wc-func-item" data-cat="data" onclick="navTo('integration')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00B42A" stroke-width="2.5"><path d="M5 3h14v4L12 14 5 7V3z"/><line x1="12" y1="14" x2="12" y2="21"/></svg></div>
+                  <div class="wc-func-item-name">数据接入</div>
+                </a>
+                <a class="wc-func-item" data-cat="data" onclick="navTo('governance')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FF7D00" stroke-width="2.5"><path d="M12 2L4 6v6c0 5 3.6 9.4 8 11 4.4-1.6 8-6 8-11V6z"/></svg></div>
+                  <div class="wc-func-item-name">数据治理</div>
+                </a>
+                <a class="wc-func-item" data-cat="data" onclick="navTo('asset')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#165DFF" stroke-width="2.5"><rect x="2" y="2" width="9" height="9" rx="1.5"/><rect x="13" y="2" width="9" height="9" rx="1.5"/><rect x="2" y="13" width="9" height="9" rx="1.5"/><rect x="13" y="13" width="9" height="9" rx="1.5"/></svg></div>
+                  <div class="wc-func-item-name">数据档案管理</div>
+                </a>
+                <a class="wc-func-item" data-cat="data" onclick="navTo('asset')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#165DFF" stroke-width="2.5"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><line x1="8" y1="10.5" x2="16" y2="6.5"/><line x1="8" y1="13.5" x2="16" y2="17.5"/></svg></div>
+                  <div class="wc-func-item-name">数据连接</div>
+                </a>
+                <a class="wc-func-item" data-cat="data" onclick="navTo('asset')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#165DFF" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="3" x2="12" y2="21"/><path d="M3 12c0-4 4-7 9-7s9 3 9 7-4 7-9 7-9-3-9-7z"/></svg></div>
+                  <div class="wc-func-item-name">可视化建模</div>
+                </a>
+                <a class="wc-func-item" data-cat="analysis" onclick="navTo('adhoc')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0FC6C2" stroke-width="2.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+                  <div class="wc-func-item-name">即席查询</div>
+                </a>
+                <a class="wc-func-item" data-cat="analysis" onclick="navTo('tracking')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#722ED1" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                  <div class="wc-func-item-name">事件分析</div>
+                </a>
+                <a class="wc-func-item" data-cat="app" onclick="navTo('abtest')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F53F3F" stroke-width="2.5"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg></div>
+                  <div class="wc-func-item-name">A/B 实验</div>
+                </a>
+                <a class="wc-func-item" data-cat="app" onclick="navTo('cdp')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F5319D" stroke-width="2.5"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+                  <div class="wc-func-item-name">用户画像</div>
+                </a>
+                <a class="wc-func-item" data-cat="admin" onclick="navTo('permission')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#86909C" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+                  <div class="wc-func-item-name">管理员</div>
+                </a>
+                <a class="wc-func-item" data-cat="admin" onclick="showToast('前往运维中心')">
+                  <div class="wc-func-item-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#86909C" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+                  <div class="wc-func-item-name">运维</div>
+                </a>
+              </div>
+            </div>
+
+            <!-- 我的快捷入口 -->
+            <div class="wc-shortcuts-block">
+              <h4>我的快捷入口</h4>
+              <div class="wc-shortcut-grid">
+                <div class="wc-shortcut-item" onclick="navTo('abtest')">
+                  <div class="wc-shortcut-dot" style="background:#F53F3F"></div>
+                  <div class="wc-shortcut-name">A/B 实验报告</div>
+                </div>
+                <div class="wc-shortcut-item" onclick="navTo('cdp')">
+                  <div class="wc-shortcut-dot" style="background:#F5319D"></div>
+                  <div class="wc-shortcut-name">人群圈选</div>
+                </div>
+                <div class="wc-shortcut-item" onclick="navTo('metric')">
+                  <div class="wc-shortcut-dot" style="background:#14C9C9"></div>
+                  <div class="wc-shortcut-name">指标市场</div>
+                </div>
+                <div class="wc-shortcut-item" onclick="navTo('adhoc')">
+                  <div class="wc-shortcut-dot" style="background:#0FC6C2"></div>
+                  <div class="wc-shortcut-name">即席查询</div>
+                </div>
+                <div class="wc-shortcut-add" onclick="showToast('添加快捷入口')">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gray3)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  <div class="wc-shortcut-add-text">添加快捷入口，下次访问不再迷路</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右侧边栏 -->
+      <div class="wc-sidebar">
+
+        <!-- 产品服务 -->
+        <div class="wc-section">
+          <div class="wc-section-hd" style="padding-bottom:0">
+            <div class="wc-section-title">产品服务</div>
+            <div class="wc-section-link" onclick="goHome()">全部</div>
+          </div>
+          <div class="wc-products-grid">
+            <div class="wc-prod-item" onclick="navTo('cdp')">
+              <div class="wc-prod-icon" style="background:#FFE8F5">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="6.5" r="4" fill="none" stroke="#F5319D" stroke-width="1.8"/><path d="M4.5 21c0-4.2 3.4-7.5 7.5-7.5s7.5 3.3 7.5 7.5" fill="none" stroke="#F5319D" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="6.5" r="1.6" fill="#F5319D"/></svg>
+              </div>
+              <div class="wc-prod-name">用户画像</div>
+            </div>
+            <div class="wc-prod-item" onclick="navTo('tracking')">
+              <div class="wc-prod-icon" style="background:#F5EEFF">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="14" width="3.5" height="6" rx="1.2" fill="#722ED1" opacity=".55"/><rect x="7.5" y="10" width="3.5" height="10" rx="1.2" fill="#722ED1" opacity=".7"/><rect x="13" y="6" width="3.5" height="14" rx="1.2" fill="#722ED1" opacity=".85"/><rect x="18.5" y="2" width="3.5" height="18" rx="1.2" fill="#722ED1"/></svg>
+              </div>
+              <div class="wc-prod-name">增长分析</div>
+            </div>
+            <div class="wc-prod-item" onclick="navTo('abtest')">
+              <div class="wc-prod-icon" style="background:#FFECE8">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="8" cy="12" r="6.5" fill="none" stroke="#F53F3F" stroke-width="1.8"/><circle cx="16" cy="12" r="6.5" fill="none" stroke="#F53F3F" stroke-width="1.8"/><text x="6" y="12.5" font-size="7.5" font-weight="700" fill="#F53F3F" text-anchor="middle">A</text><text x="18" y="12.5" font-size="7.5" font-weight="700" fill="#F53F3F" text-anchor="middle">B</text></svg>
+              </div>
+              <div class="wc-prod-name">A/B 测试</div>
+            </div>
+            <div class="wc-prod-item" onclick="navTo('asset')">
+              <div class="wc-prod-icon" style="background:#EEF3FF">
+                <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="5" cy="12" r="2.5" fill="none" stroke="#165DFF" stroke-width="1.8"/><circle cx="19" cy="5" r="2.5" fill="none" stroke="#165DFF" stroke-width="1.8"/><circle cx="19" cy="19" r="2.5" fill="none" stroke="#165DFF" stroke-width="1.8"/><line x1="7.2" y1="10.8" x2="16.8" y2="6.2" stroke="#165DFF" stroke-width="1.5"/><line x1="7.2" y1="13.2" x2="16.8" y2="17.8" stroke="#165DFF" stroke-width="1.5"/></svg>
+              </div>
+              <div class="wc-prod-name">智能数据洞察</div>
+            </div>
+            <div class="wc-prod-item" onclick="goHome()">
+              <div class="wc-prod-icon" style="background:#EEF3FF">
+                <svg viewBox="0 0 24 24" width="18" height="18"><rect x="2" y="3" width="9" height="8" rx="1.5" fill="none" stroke="#165DFF" stroke-width="1.8"/><rect x="13" y="3" width="9" height="8" rx="1.5" fill="none" stroke="#165DFF" stroke-width="1.8"/><rect x="2" y="13" width="9" height="8" rx="1.5" fill="none" stroke="#165DFF" stroke-width="1.8"/><rect x="13" y="13" width="9" height="8" rx="1.5" fill="none" stroke="#165DFF" stroke-width="1.8"/></svg>
+              </div>
+              <div class="wc-prod-name">产品门户</div>
+            </div>
+            <div class="wc-prod-item" onclick="navTo('ai')">
+              <div class="wc-prod-icon" style="background:#F3EEFF">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l1.8 5.5L19 8.2l-3.8 3.2.9 5.6-4.1-3.8-4.1 3.8.9-5.6L5 8.2l5.2-.7L12 2z" fill="#7B61FF"/><circle cx="12" cy="12" r="10" fill="none" stroke="#7B61FF" stroke-width="1.2" opacity=".3"/></svg>
+              </div>
+              <div class="wc-prod-name">AI 助手</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 站内信 -->
+        <div class="wc-section">
+          <div class="wc-section-hd">
+            <div class="wc-section-icon" style="background:#EEF3FF">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="wc-section-title">站内信</div>
+            <div class="wc-section-badge" style="background:#FFECE8;color:#F53F3F">3 条未读</div>
+          </div>
+          <div class="wc-msg-list">
+            <div class="wc-msg-item" onclick="showToast('查看站内信')">
+              <div class="wc-msg-from">管理员</div>
+              <div class="wc-msg-preview">平台 v2.1 已发布，包含 A/B 实验报告优化…</div>
+              <div class="wc-msg-time">今天</div>
+            </div>
+            <div class="wc-msg-item" onclick="showToast('查看站内信')">
+              <div class="wc-msg-from">系统</div>
+              <div class="wc-msg-preview">你有 1 条待审批的实验申请</div>
+              <div class="wc-msg-time">昨天</div>
+            </div>
+            <div class="wc-msg-item" onclick="showToast('查看站内信')">
+              <div class="wc-msg-from">荣凯升</div>
+              <div class="wc-msg-preview">月卡支付宝实验报告已生成，请查阅</div>
+              <div class="wc-msg-time">5月30</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 帮助中心 -->
+        <div class="wc-section">
+          <div class="wc-section-hd">
+            <div class="wc-section-icon" style="background:#F3EEFF">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7B61FF" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 015.13 2c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".8" fill="#7B61FF"/></svg>
+            </div>
+            <div class="wc-section-title">帮助中心</div>
+          </div>
+          <div class="wc-help-list">
+            <div class="wc-help-item" onclick="showToast('前往帮助中心：号码的使用和管理')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 015.13 2c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".8" fill="currentColor"/></svg>
+              <span>号码的使用和管理</span>
+            </div>
+            <div class="wc-help-item" onclick="showToast('前往帮助中心：站内信管理')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>站内信管理</span>
+            </div>
+            <div class="wc-help-item" onclick="showToast('前往帮助中心：办公软件集成')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+              <span>办公软件集成</span>
+            </div>
+            <div class="wc-help-item" onclick="showToast('提交反馈')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              <span>意见反馈</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer"><span>X-Data 数据平台 · 工作台</span><span>v2.0 · 2026</span></div>
+  </div>
+  <!-- ══════════════════ / WELCOME VIEW ══════════════════ -->
   <div id="homeView">
     <div class="hero-band">
       <div class="hero-left">
@@ -1133,6 +1744,7 @@ const NAV_TAB_MAP = {
 };
 
 function goHome() {
+  document.getElementById('welcomeView').style.display = 'none';
   document.getElementById('homeView').style.display = 'block';
   document.getElementById('detailView').style.display = 'none';
   document.getElementById('detailView').innerHTML = '';
@@ -1142,6 +1754,7 @@ function goHome() {
 
 function navTo(platformId, tabId) {
   const p = PLATFORMS[platformId]; if (!p) return;
+  document.getElementById('welcomeView').style.display = 'none';
   document.getElementById('homeView').style.display = 'none';
   const dv = document.getElementById('detailView');
   dv.style.display = 'block';
@@ -1418,6 +2031,111 @@ function showToast(msg) {
   el.textContent = msg; el.classList.add('show');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+/* ═══════════════ WELCOME PAGE LOGIC ═══════════════ */
+function showWelcome() {
+  document.getElementById('welcomeView').style.display = 'block';
+  document.getElementById('homeView').style.display = 'none';
+  document.getElementById('detailView').style.display = 'none';
+  document.getElementById('detailView').innerHTML = '';
+  // deactivate all nav tabs when in welcome
+  ['ntHome','ntIntegration','ntTracking','ntAssetQuality','ntAnalysis','ntApplication','ntAI','ntPermission']
+    .forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('active'); });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Realtime clock
+function wcUpdateClock() {
+  const el = document.getElementById('wcClock');
+  if (!el) return;
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  el.textContent = `${now.getFullYear()}年${pad(now.getMonth()+1)}月${pad(now.getDate())}日 ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+}
+setInterval(wcUpdateClock, 1000);
+wcUpdateClock();
+
+// Update greeting based on time of day
+(function() {
+  const h = new Date().getHours();
+  let greeting;
+  if (h < 6)       greeting = '夜深了';
+  else if (h < 12) greeting = '早上好';
+  else if (h < 14) greeting = '中午好';
+  else if (h < 18) greeting = '下午好';
+  else             greeting = '晚上好';
+  const el = document.querySelector('.wc-greeting');
+  if (el) el.innerHTML = el.innerHTML.replace('下午好', greeting);
+})();
+
+// Pending items tab switch
+const wcTodoData = {
+  abtest: { dot:'#F53F3F', name:'A/B 实验平台', info:'近期待审批任务，请关注', count:1, unit:'条待处理实验审批', items:[{name:'月卡支付宝新扣费模式 A/B 实验 — 待审批', time:'今日 09:30', platform:'abtest'}] },
+  xdap:   { dot:'#00B42A', name:'XDAP 数据集成', info:'任务调度告警', count:0, unit:'条待处理事项', items:[] },
+  dqc:    { dot:'#FF7D00', name:'DQC 数据质量', info:'最新质量报告已就绪', count:0, unit:'条待处理事项', items:[] },
+  cdp:    { dot:'#F5319D', name:'CDP 用户画像', info:'人群同步任务', count:0, unit:'条待处理事项', items:[] }
+};
+
+function wcTodoTab(el, key) {
+  document.querySelectorAll('.wc-todo-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const d = wcTodoData[key];
+  const body = document.getElementById('wcTodoBody');
+  const itemsHTML = d.items.length ? d.items.map(i => `
+    <div class="wc-todo-item" onclick="navTo('${i.platform}')">
+      <div class="wc-todo-item-dot" style="background:${d.dot}"></div>
+      <div class="wc-todo-item-name">${i.name}</div>
+      <div class="wc-todo-item-time">${i.time}</div>
+    </div>`).join('') : `
+    <div class="wc-todo-empty">
+      <div class="wc-todo-empty-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      无待处理事项
+    </div>`;
+  body.innerHTML = `
+    <div class="wc-todo-platform">
+      <div class="wc-todo-platform-dot" style="background:${d.dot}"></div>
+      <div class="wc-todo-platform-name">${d.name}</div>
+      <div class="wc-todo-platform-info">${d.info}</div>
+    </div>
+    <div class="wc-todo-count">${d.count}</div>
+    <div class="wc-todo-hint">${d.unit}</div>
+    <div class="wc-todo-items">${itemsHTML}</div>`;
+}
+
+// Function category filter
+function wcFuncCat(el, cat) {
+  document.querySelectorAll('.wc-func-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('#wcFuncList .wc-func-item').forEach(item => {
+    const itemCat = item.dataset.cat;
+    item.style.display = (cat === 'all' || itemCat === cat) ? '' : 'none';
+  });
+}
+
+// Function search filter
+function wcFilterFuncs(val) {
+  const q = val.trim().toLowerCase();
+  document.querySelectorAll('#wcFuncList .wc-func-item').forEach(item => {
+    const name = item.querySelector('.wc-func-item-name').textContent.toLowerCase();
+    item.style.display = (!q || name.includes(q)) ? '' : 'none';
+  });
+  // reset category chips if searching
+  if (q) {
+    document.querySelectorAll('.wc-func-chip').forEach(c => c.classList.remove('active'));
+    document.querySelector('.wc-func-chip[data-cat="all"]').classList.add('active');
+  }
+}
+
+// Switch between welcome work-mode tabs
+function wcSwitch(mode) {
+  if (mode === 'work') {
+    // stay on welcome
+  } else {
+    goHome();
+  }
 }
 
 renderPortalCards();
